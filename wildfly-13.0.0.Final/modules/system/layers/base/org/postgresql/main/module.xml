@@ -1,0 +1,19 @@
+
+<!-- {wildfly_dir}\modules\system\layers\base\org\postgresql\main\module.xml -->
+
+<!-- Na mesma pasta do module.xml é preciso adicionar o driver jdbc do PostgreSQL condizente ao nome em resource-root path -->
+
+<!-- JAR Download: http://central.maven.org/maven2/org/postgresql/postgresql/9.4.1211/postgresql-9.4.1211.jar -->
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<module  xmlns="urn:jboss:module:1.6" name="org.postgresql">
+  <resources>
+    <resource-root path="postgresql-9.4-1202.jdbc4.jar"/>
+  </resources>
+  <dependencies>
+     <module name="javax.api"/>
+     <module name="javax.transaction.api"/>
+   </dependencies>
+</module>
+
