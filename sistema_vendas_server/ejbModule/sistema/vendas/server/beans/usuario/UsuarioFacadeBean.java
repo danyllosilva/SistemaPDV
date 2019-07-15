@@ -11,7 +11,7 @@ import javax.persistence.Query;
 @Stateless(name=UsuarioFacadeBean.NAME)
 public class UsuarioFacadeBean {
 	
-	public static final String NAME = "sistema_vendas_UsuarioFacadeBean";
+	public static final String NAME = "sistema_vendas_server_UsuarioFacadeBean";
 	
 	@PersistenceContext(unitName="sistema_vendas_server")
 	public EntityManager manager;
