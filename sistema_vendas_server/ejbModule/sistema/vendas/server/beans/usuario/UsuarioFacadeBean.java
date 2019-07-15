@@ -12,7 +12,8 @@ import javax.persistence.Query;
 public class UsuarioFacadeBean {
 	
 	public static final String NAME = "sistema_vendas_server_UsuarioFacadeBean";
-	
+	public static final String JNDI = "sistema_vendas_server/sistema_vendas_server_UsuarioFacadeBean!sistema.vendas.server.beans.usuario.UsuarioFacadeBean";
+
 	@PersistenceContext(unitName="sistema_vendas_server")
 	public EntityManager manager;
 	
@@ -50,4 +51,14 @@ public class UsuarioFacadeBean {
 		
 	}
 
+	
+	public Usuario findByLogin(String login) {
+		Query q = manager.createQuery(" select usr from "+Usuario.NAME+" usr where usr.login LIKE :arg0 ");
+		q.setParameter("arg0", login.trim());
+		
+		Usuario usuario = (Usuario) q.getSingleResult();
+		
+		return usuario;
+		
+	}
 }

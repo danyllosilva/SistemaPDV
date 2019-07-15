@@ -119,9 +119,9 @@
 					<n:h1 class="h1-1 h1" style="font-family: 'Roboto';color:white;margin-bottom:0px">SDV</n:h1>
 					<n:h2 class="h2-1 h2" style="color:white;margin-top:0px">Sistema de Vendas</n:h2>
 				</n:div><n:br></n:br>
-			  	<textbox sclass="form-control" value="@bind(vm.usuario.login)" style="color:white;background: rgba(255, 255, 255, 0.08);text-transform:uppercase"
-		  						maxlength="20" width="203px" placeholder="Usuário" />
-		  		<textbox sclass="form-control" value="@bind(vm.usuario.senha)" style="margin-top:0.5%;background: rgba(255, 255, 255, 0.08)"  maxlength="16" 
+			  	<textbox sclass="form-control" value="@bind(vm.login)" style="color:white;background: rgba(255, 255, 255, 0.08);"
+		  						maxlength="100" width="203px" placeholder="Usuário" />
+		  		<textbox sclass="form-control" value="@bind(vm.senha)" style="margin-top:0.5%;background: rgba(255, 255, 255, 0.08)"  maxlength="16" 
 	  						type="password" width="203px" placeholder="Senha" onOK="@command('logar')"/>
 				<n:div class = "col-xs-10 col-sm-6 col-md- col-lg-3 zero-pd-left max-width" style="padding-top:0.5%;">
   							<n:div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 zero-pd-left" style="padding-top:1.6%">

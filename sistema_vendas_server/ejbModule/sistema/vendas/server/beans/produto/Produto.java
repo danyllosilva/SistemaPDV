@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import sistema.vendas.server.beans.categoriaproduto.CategoriaProduto;
 
@@ -41,7 +42,14 @@ public class Produto implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="categoria_produto_id", referencedColumnName="categoria_produto_id")
 	private CategoriaProduto categoriaProduto;
+	
+	@Transient
+	private Double precoTotal;
 
+	public Double getPrecoTotal() {
+		return (this.quantidade*this.preco.doubleValue());
+	}
+	
 	public Integer getCodigoProdutoId() {
 		return codigoProdutoId;
 	}
