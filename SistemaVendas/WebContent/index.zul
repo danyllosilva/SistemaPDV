@@ -1,0 +1,136 @@
+<?page title="Sistema de Vendas - Login" contentType="text/html;charset=UTF-8"?>
+<zk xmlns:x="xhtml" xmlns:n="native" xmlns:w="client" xmlns:ca="client/attribute" xmlns:z="zk">
+<!-- CSS -->
+	<n:link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <n:link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" 
+    	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+   	<n:link href="https://fonts.googleapis.com/css?family=Lato|Roboto" rel="stylesheet"/>
+	 
+	<style>
+		#video-background {
+		position:fixed;
+		  right: 0; 
+		  bottom: 0;
+		  min-width: 100%; 
+		  max-height: 100%;
+		  object-fit: cover;
+		  z-index: -100;
+		  overflow:hidden;
+		}
+		.zero-pd-left{
+	    	padding-left:0px;		    
+	    }
+		@media(min-width:991px) {
+		    .zero-pd-left2{
+		    	padding-left:0px;		    
+		    }
+		}
+		@media(min-width:600px) {
+			.h1-1{
+				font-size: 6vw;
+			}
+			.h2-1{
+				font-size: 2.5vw;
+			}
+		}
+		@media(max-width:600px) {
+		    .max-altura{
+		    	height:450px;		    
+		    }
+		    .max-width{
+		    	width:100%;
+		    }
+		    .to-center {
+			    padding-right: 11%;
+			}
+			.h1{
+				font-size: 12;
+			}
+			.h2{
+				font-size: 5vw;
+			}
+			.wd-title{
+				width:100%
+			}
+		}
+		html{
+		  width: 100%; 
+		  height:100%; 
+		  overflow:hidden;
+		}
+		body{
+		  width: 100%; 
+		  height:100%; 
+		  overflow:hidden;
+			padding:0px;
+			font-family: "Lato";
+		}
+		a{
+			color: white;
+		}
+		.z-temp, .z-modal-mask {
+		    width: 100%;
+		    height: 100%;
+		    background: rgb(0,0,0);
+		    opacity: .85;
+		    filter: alpha(opacity=60);
+		    position: absolute;
+		    top: 0;
+		    left: 0;
+		}
+		a:visited, a:hover, a:active{
+			color: white;
+			font-weight: bold;
+		}
+	</style>
+	
+	<!-- JavaScript -->
+	<!-- <?script src="/css/bootstrap-3.3.7/js/bootstrap.min.js" ?> -->
+	<div viewModel="@id('vm') @init('sistema.vendas.pages.VM.LoginVM')">
+		<html>
+			<attribute name="content">
+				<!-- html5 video tag -->
+				<script>
+					$(document).ready(function(){
+						window.addEventListener('load', function(){
+						    var newVideo = document.getElementById('video-background');
+						    newVideo.addEventListener('ended', function() {
+						        this.currentTime = 0;
+						        this.play();
+						    }, false);
+						
+						    newVideo.play();
+						
+						});
+					});
+				</script>
+				<div class="videoContainer hide-for-small-only">
+                      <div class="overlay" style="position:absolute;background:rgba(0,0,0,0.38);z-index:-99; height:100%;width:100%"></div>
+	                  <video playsinline="" poster="/SistemaVendas/img/video-work.png"  autoplay="" loop=""  id="video-background" muted="" src="/SistemaVendas/img/video-work.mp4" >
+					  </video>
+                </div>
+			</attribute>
+		</html>
+		<n:div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="position:absolute;height:100%" >
+			<div sclass="to-center" style="padding-top:2%;" align="right">
+ 			</div>
+			<div style="padding-left:8%">
+				<n:div class="wd-title" style="padding-top:15%;">
+					<n:h1 class="h1-1 h1" style="font-family: 'Roboto';color:white;margin-bottom:0px">SDV</n:h1>
+					<n:h2 class="h2-1 h2" style="color:white;margin-top:0px">Sistema de Vendas</n:h2>
+				</n:div><n:br></n:br>
+			  	<textbox sclass="form-control" value="@bind(vm.usuario.login)" style="color:white;background: rgba(255, 255, 255, 0.08);text-transform:uppercase"
+		  						maxlength="20" width="203px" placeholder="Usuário" />
+		  		<textbox sclass="form-control" value="@bind(vm.usuario.senha)" style="margin-top:0.5%;background: rgba(255, 255, 255, 0.08)"  maxlength="16" 
+	  						type="password" width="203px" placeholder="Senha" onOK="@command('logar')"/>
+				<n:div class = "col-xs-10 col-sm-6 col-md- col-lg-3 zero-pd-left max-width" style="padding-top:0.5%;">
+  							<n:div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 zero-pd-left" style="padding-top:1.6%">
+  								<button zclass="btn btn-default" label="Acessar" style="background:#415e9b;color:white;font-weight:bold;border-radius:0px;border:0px" onClick="@command('logar')"/>
+  							</n:div>
+  							<n:div class="col-xs-8 col-sm-7 col-md-8 col-lg-8 zero-pd-left2">
+  							</n:div>
+				</n:div>
+	  		</div>				  
+	   </n:div>
+	</div>
+</zk>
