@@ -77,8 +77,8 @@
 		<north></north>
 		<south></south>
 		<center>
-			<div class="jumbotron" style="padding-top: 0px;">
-			<listbox id="listaDeProdutosCaixa" model="@bind(vm.produtosAdicionadosCaixa)" selectedItem="@bind(vm.produto)">
+			<div  style="padding-top: 0px;">
+			<listbox id="listaDeProdutosCaixa" model="@bind(vm.produtosAComprarCesta)" selectedItem="@bind(vm.cesta)">
 				<listhead>
 					<listheader>Cód. Produto</listheader>
 					<listheader>Descrição</listheader>
@@ -88,11 +88,11 @@
 				</listhead>
 				<template name="model" var="item">
 					<listitem>
-						<listcell label="@load(item.codigoProdutoId)"/>
-						<listcell label="@load(item.nome)"/>
+						<listcell label="@load(item.produto.codigoProdutoId)"/>
+						<listcell label="@load(item.produto.nome)"/>
 						<listcell label="@load(item.quantidade)"/>
-						<listcell label="@load(item.preco)"/>
-						<listcell label="@load(item.precoTotal)"/>
+						<listcell label="@load(item.produto.preco)"/>
+						<listcell label="@load(item.valorTotal)"/>
 					</listitem>
 				</template>
 			</listbox>
@@ -104,15 +104,16 @@
 			</div>
 			
 			<window id="winListagemBanco"  title="Produtos Disponíveis"  position="center" border="normal" 
-			closable="true" visible="false" width="800px" height="600px"
+			closable="true" visible="false" width="800px" height="600px" 
 			onClose="self.visible=false;event.stopPropagation();" >
-				<listbox id="listaDeProdutosBanco" model="@bind(vm.produtosBanco)" selectedItem="@bind(vm.produto)">
+				
+				<listbox id="listaDeProdutosBanco" model="@bind(vm.produtosBanco)" mold="paging" autopaging="true" pageSize="6"  selectedItem="@bind(vm.produtoBanco)">
 				<listhead>
 					<listheader>Cód. Produto</listheader>
 					<listheader>Descrição</listheader>
 					<listheader>Quantidade</listheader>
 					<listheader>Valor Unitário</listheader>
-					<listheader>Valor Total</listheader>
+				 
 				</listhead>
 				<template name="model" var="item">
 					<listitem>
@@ -120,10 +121,21 @@
 						<listcell label="@load(item.nome)"/>
 						<listcell label="@load(item.quantidade)"/>
 						<listcell label="@load(item.preco)"/>
-						<listcell label="@load(item.precoTotal)"/>
+						 
 					</listitem>
 				</template>
 			</listbox>
+			 
+			 <vbox>
+				<label>Descrição Produto:</label> 
+				<label value="@bind(vm.produtoBanco.nome)"/>
+				Quantidade Desejada:
+				<intbox value="@bind(vm.quantidade)"></intbox>
+			 </vbox>   
+			<div align="right">
+				
+				<button class="btn-primary" onClick="@command('adicionarNoCarrinho')">Adicionar</button>
+			</div>
 			</window>
 			
 			</div>
