@@ -9,12 +9,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import sistema.vendas.server.beans.tipoUsuario.TipoUsuario;
+
 @Entity(name=Usuario.NAME)
 @Table(name="usuario")
 public class Usuario implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	public static final String NAME ="sistema_vendas_Usuario";
+	
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -30,6 +33,10 @@ public class Usuario implements Serializable{
 	@Column(name="senha")
 	private String senha;
 
+	@Column(name="tipo_usuario")
+	private Integer tipoUsario;
+	
+	
 	public Integer getUsuarioId() {
 		return usuarioId;
 	}
