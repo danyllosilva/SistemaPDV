@@ -11,6 +11,8 @@ import javax.persistence.Query;
 @Stateless(name=CestaFacadeBean.NAME)
 public class CestaFacadeBean {
 	public static final String NAME = "sistema_vendas_server_CestaFacadeBean";
+	public static final String JNDI = "sistema_vendas_server/sistema_vendas_server_CestaFacadeBean!sistema.vendas.server.beans.cesta.CestaFacadeBean";
+
 	
 	@PersistenceContext(unitName="sistema_vendas_server")
 	public EntityManager manager;
