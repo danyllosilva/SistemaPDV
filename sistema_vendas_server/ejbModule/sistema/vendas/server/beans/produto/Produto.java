@@ -98,4 +98,24 @@ public class Produto implements Serializable{
 		this.categoriaProduto = categoriaProduto;
 	}
 	
+	/****
+	 * 	INSERT INTO public.produto(codigo_produto_id,nome,preco,quantidade,
+	 * unidade_medida,categoria_produto_id) VALUES (1,'vehicula',3,137,'Quilograma ',1),
+	 * (2,'risus.',31,307,'Quilograma ',6),(3,'et,',182,201,'Quilograma ',5),
+	 * (4,'ligula.',19,378,'Quilograma ',5),(5,'a',101,280,'Quilograma ',2),
+	 * (6,'placerat.',49,245,'Quilograma ',4),(7,'Integer',17,170,' Unidade',5),
+	 * (8,'elit.',181,142,'Quilograma ',5),(9,'tempus',142,62,'Quilograma ',5),
+	 * (10,'natoque',101,65,' Unidade',3),(11,'diam.',185,333,' Unidade',5),
+	 * (12,'a',130,55,' Unidade',6),(13,'luctus',175,74,'Quilograma ',5),
+	 * (14,'tincidunt',15,343,'Quilograma ',3),(15,'nonummy.',45,156,'Quilograma ',4),
+	 * (16,'magna',22,140,'Quilograma ',1),(17,'est',77,91,' Unidade',3),
+	 * (18,'arcu',115,112,'Quilograma ',4),(19,'augue.',183,134,'Quilograma ',3),
+	 * (20,'in',200,191,' Unidade',6),(21,'mi',48,179,'Quilograma ',3),
+	 * (22,'orci.',143,369,'Quilograma ',1),(23,'neque',122,56,' Unidade',2),
+	 * (24,'ridiculus',190,384,' Unidade',2),(25,'erat',58,160,' Unidade',4),
+	 * (26,'volutpat',77,324,' Unidade',5),(27,'neque.',98,121,'Quilograma ',2),
+	 * (28,'sit',12,150,' Unidade',2),(29,'pede.',15,266,'Quilograma ',2),(30,'ac',11,118,'Quilograma ',5);
+	 * 
+	 * ***/
+	
 }
