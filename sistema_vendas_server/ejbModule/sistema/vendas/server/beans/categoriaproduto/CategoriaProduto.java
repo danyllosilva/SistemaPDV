@@ -45,6 +45,12 @@ public class CategoriaProduto implements Serializable {
 		this.nome = nome;
 	}
 	
-	
+	/*****
+	 * 
+	 * INSERT INTO public.categoriaproduto(categoria_produto_id,nome) VALUES 
+	 * (1,' Higiene '),(2,' Beleza   '),(3,' Limpeza '),(4,' Bebidas '), 
+	 * (5,' Industrializados '), (6,'Alimentos ');
+	 * 
+	 * ******/
 	
 }
