@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import sistema.vendas.server.beans.produto.Produto;
 import sistema.vendas.server.beans.registrovendas.RegistroVendas;
@@ -36,6 +37,18 @@ public class Cesta implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="registro_vendas_id", referencedColumnName="registro_vendas_id")
 	private RegistroVendas registroVendas;
+	
+	@Transient
+	private Double valorTotal;
+
+	
+	public Double getValorTotal() {
+		return (this.quantidade*this.produto.getPreco().doubleValue());
+	}
+
+	public void setValorTotal(Double valorTotal) {
+		this.valorTotal = valorTotal;
+	}
 
 	public Integer getCestaId() {
 		return cestaId;
@@ -59,6 +72,14 @@ public class Cesta implements Serializable {
 
 	public void setRegistroVendas(RegistroVendas registroVendas) {
 		this.registroVendas = registroVendas;
+	}
+
+	public Produto getProduto() {
+		return produto;
+	}
+
+	public void setProduto(Produto produto) {
+		this.produto = produto;
 	}
 	
 	
