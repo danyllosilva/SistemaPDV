@@ -47,5 +47,14 @@ public class CompradorFacadeBean {
 		
 		return compradores;
 	}
+
+	public Comprador findByCpf(String cpf) {
+		Query q = manager.createQuery(" select comprador from "+Comprador.NAME+" comprador where comprador.cpf LIKE :arg0 ");
+	    q.setParameter("arg0", cpf);
+	    
+	    Comprador comprador = (Comprador) q.getSingleResult();
+		
+	    return comprador;
+	}
 	
 }
