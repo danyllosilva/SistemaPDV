@@ -7,24 +7,25 @@ import javax.ejb.Init;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
 import org.zkoss.bind.annotation.ContextType;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.bind.annotation.Scope;
+import org.zkoss.bind.annotation.ScopeParam;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Window;
 
 import sistema.vendas.server.beans.cesta.Cesta;
-import sistema.vendas.server.beans.comprador.Comprador;
 import sistema.vendas.server.beans.produto.Produto;
 import sistema.vendas.server.beans.produto.ProdutoFacadeBean;
 import sistema.vendas.server.beans.registrovendas.RegistroVendas;
-import sistema.vendas.server.beans.usuario.UsuarioFacadeBean;
+import sistema.vendas.util.ObjetoSessao;
 
 
 public class CaixaVM {
@@ -36,7 +37,7 @@ public class CaixaVM {
 	private Produto produto;
 	private Produto produtoBanco;
 	private Integer quantidade;
-	
+	private Double valorTotalCarrinho = 0.00;
 	
 	private Cesta cesta;
 	private RegistroVendas registroVenda;
@@ -59,11 +60,17 @@ public class CaixaVM {
 	}
 	
 	@Init
-	public void init() {
-		produtosAdicionadosCaixa = new ArrayList<Produto>();
-		produtosAComprarCesta = new ArrayList<Cesta>();
-		registroVenda = new RegistroVendas();
-		 
+	public void init(@ScopeParam(scopes = Scope.SESSION, value = "objetoSessao") ObjetoSessao os) {
+		if (os.getUsuarioId() == null) {
+			Executions.sendRedirect("login.zul");
+			System.out.println("TESTE TESTE");
+		}else if(os.getUsuarioId() > 1){
+			Executions.sendRedirect("login.zul");
+		}else {
+			produtosAdicionadosCaixa = new ArrayList<Produto>();
+			produtosAComprarCesta = new ArrayList<Cesta>();
+			registroVenda = new RegistroVendas();
+		}
 	}
 
 	@AfterCompose
@@ -106,7 +113,7 @@ public class CaixaVM {
 					cesta.setRegistroVendas(registroVenda);
 					
 					produtosAComprarCesta.add(cesta);
-					
+					valorTotalCarrinho+=cesta.getValorTotal();
 					 
 					 
 					produtosAdicionadosCaixa.add(produto);
@@ -129,6 +136,7 @@ public class CaixaVM {
 		try {
 			if(cesta !=null) {
 				produtosAComprarCesta.remove(cesta);
+				valorTotalCarrinho-=cesta.getValorTotal();
 				Clients.showNotification("Produto Removido do carrinho!", Clients.NOTIFICATION_TYPE_INFO, null, null, 2500);
 
 			}
@@ -206,6 +214,14 @@ public class CaixaVM {
 
 	public void setProdutosAComprarCesta(Collection<Cesta> produtosAComprarCesta) {
 		this.produtosAComprarCesta = produtosAComprarCesta;
+	}
+
+	public Double getValorTotalCarrinho() {
+		return valorTotalCarrinho;
+	}
+
+	public void setValorTotalCarrinho(Double valorTotalCarrinho) {
+		this.valorTotalCarrinho = valorTotalCarrinho;
 	}
 	
 	
