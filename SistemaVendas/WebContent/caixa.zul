@@ -74,7 +74,14 @@
 		}
 	</style>
 	<borderlayout viewModel="@id('vm') @init('sistema.vendas.pages.VM.CaixaVM')">
-		<north></north>
+		<north>
+			<div>
+				<hbox>
+					<label> Valor Total: R$  </label>
+					<label value="@bind(vm.valorTotalCarrinho)"/>
+				</hbox>
+			</div>
+		</north>
 		<south></south>
 		<center>
 			<div  style="padding-top: 0px;">
@@ -125,13 +132,17 @@
 					</listitem>
 				</template>
 			</listbox>
-			 
-			 <vbox>
-				<label>Descrição Produto:</label> 
-				<label value="@bind(vm.produtoBanco.nome)"/>
-				Quantidade Desejada:
-				<intbox value="@bind(vm.quantidade)"></intbox>
-			 </vbox>   
+			 <div>
+				  <hbox>
+					<label>Descrição Produto:</label> 
+					<label value="@bind(vm.produtoBanco.nome)"/>
+				  </hbox>
+				  <hbox>
+					<label>Quantidade Desejada: </label>
+					<intbox class="form" value="@bind(vm.quantidade)"></intbox>
+				</hbox>
+			</div>
+			    
 			<div align="right">
 				
 				<button class="btn-primary" onClick="@command('adicionarNoCarrinho')">Adicionar</button>
@@ -141,7 +152,7 @@
 			</div>
 			
 		</center>
-		<east></east>
-		<west></west>
+		<east size="0"></east>
+		<west  size="0"></west>
 	</borderlayout>
 </zk>
