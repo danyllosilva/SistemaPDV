@@ -10,11 +10,14 @@ import org.zkoss.bind.annotation.ContextParam;
 import org.zkoss.bind.annotation.ContextType;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.util.Clients;
 
 import sistema.vendas.server.beans.usuario.Usuario;
 import sistema.vendas.server.beans.usuario.UsuarioFacadeBean;
+import sistema.vendas.util.ObjetoSessao;
 
  
 
@@ -62,7 +65,18 @@ public class LoginVM {
 				usuario = usuarioFacadeBean.findByLogin(login);
 				if(usuario != null) {
 					if(usuario.getSenha().equals(senha)) {
-						Clients.showNotification("Usuário Logado!", Clients.NOTIFICATION_TYPE_WARNING, null, null, 2000);
+						//Clients.showNotification("Usuário Logado!", Clients.NOTIFICATION_TYPE_WARNING, null, null, 2000);
+						
+						ObjetoSessao obj = new ObjetoSessao();
+						obj.setUsuarioId(usuario.getUsuarioId());
+						Sessions.getCurrent().setAttribute("objetoSessao", obj);
+						
+						//CAIXA
+						if(usuario.getTipoUsario() == 1) {
+							Executions.sendRedirect("inserirCliente.zul");
+						}
+						
+					
 					}
 				}
 			}
