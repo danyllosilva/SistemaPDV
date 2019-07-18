@@ -68,6 +68,14 @@ public class Usuario implements Serializable{
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+
+	public Integer getTipoUsario() {
+		return tipoUsario;
+	}
+
+	public void setTipoUsario(Integer tipoUsario) {
+		this.tipoUsario = tipoUsario;
+	}
 	
 	
 	
