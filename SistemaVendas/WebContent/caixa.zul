@@ -74,13 +74,7 @@
 		}
 	</style>
 	<borderlayout viewModel="@id('vm') @init('sistema.vendas.pages.VM.CaixaVM')">
-		<north>
-			<div>
-				<hbox>
-					<label> Valor Total: R$  </label>
-					<label value="@bind(vm.valorTotalCarrinho)"/>
-				</hbox>
-			</div>
+		<north size="0">
 		</north>
 		<south></south>
 		<center>
@@ -104,10 +98,17 @@
 				</template>
 			</listbox>
 			
+			<div>
+				<hbox>
+					<label> Valor Total Geral: R$  </label>
+					<label value="@bind(vm.valorTotalCarrinho)"/>
+				</hbox>
+			</div>
 			<div align="right">
 				<button class="btn-primary" onClick="@command('adicionar')">Adicionar</button>
-				<button class="btn-danger" onClick="@command('remover')">Remover</button>
+				<button class="btn-warning" onClick="@command('remover')">Remover</button>
 				<button class="btn-success" onClick="@command('finalizar')">Finalizar</button>
+				<button class="btn-danger" onClick="@command('cancelarCarrinho')">Cancelar Carrinho</button>
 			</div>
 			
 			<window id="winListagemBanco"  title="Produtos Disponíveis"  position="center" border="normal" 
@@ -144,10 +145,35 @@
 			</div>
 			    
 			<div align="right">
-				
 				<button class="btn-primary" onClick="@command('adicionarNoCarrinho')">Adicionar</button>
 			</div>
 			</window>
+			
+			<window id="winListagemFormasPagamento"  title="Formato Pagamento"  position="center" border="normal" 
+			closable="true" visible="false" width="800px" height="600px" onClose="self.visible=false;event.stopPropagation();" >
+				
+				<listbox id="listaDeFormasPagamento" model="@bind(vm.formasPagamentos)" mold="paging" autopaging="true" pageSize="6"  selectedItem="@bind(vm.formaPagamento)">
+				<listhead>
+					<listheader>Descrição</listheader>
+				</listhead>
+				<template name="model" var="item">
+					<listitem>
+						<listcell label="@load(item.descricao)"/>
+					</listitem>
+				</template>
+			</listbox>
+			 <div>
+				  <hbox>
+					<label>Quantidade de Parcelas:</label> 
+					<intbox value="@bind(vm.quantidadeParcelasDesejadas)"/>
+				  </hbox>
+			</div>
+			<div align="right">
+				<button class="btn-primary" onClick="@command('finalizarCompra')">Finalizar</button>
+			</div>
+			</window>
+			
+			
 			
 			</div>
 			
