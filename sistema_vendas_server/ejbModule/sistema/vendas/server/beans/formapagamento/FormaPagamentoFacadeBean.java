@@ -11,6 +11,8 @@ import javax.persistence.Query;
 @Stateless(name=FormaPagamentoFacadeBean.NAME)
 public class FormaPagamentoFacadeBean {
 	public static final String NAME = "sistema_vendas_server_FormaPagamentoFacadeBean";
+	public static final String JNDI = "sistema_vendas_server/sistema_vendas_server_FormaPagamentoFacadeBean!sistema.vendas.server.beans.formapagamento.FormaPagamentoFacadeBean";
+
 	
 	@PersistenceContext(unitName="sistema_vendas_server")
 	public EntityManager manager;
@@ -47,4 +49,24 @@ public class FormaPagamentoFacadeBean {
 		return formasPagamento;
 		
 	}
+	
+	/*****
+	 * 
+	 * INSERT INTO public.formapagamento(
+	 *  forma_pagamento_id, descricao)
+	 *  VALUES (1, 'Dinheiro'),
+	 *	   (2, 'Cartão'),
+	 *	   (3, 'Ticket-alimentação');
+	 * 
+	 * 
+	 ********/
+	
+	
+	/**********************************************
+	 * Mastercard   		6     1%			  *
+	 * Visa         		8     2%			  *
+	 * Elo          		3     3%			  *
+	 * American Express 	10	  0,5%			  *
+	 * Credicard			5	  2,5%			  *
+	 * ********************************************/
 }
