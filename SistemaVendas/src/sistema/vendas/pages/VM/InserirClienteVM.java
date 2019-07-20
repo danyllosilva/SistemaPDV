@@ -1,6 +1,5 @@
 package sistema.vendas.pages.VM;
 
-import javax.ejb.Init;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
@@ -8,6 +7,7 @@ import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
 import org.zkoss.bind.annotation.ContextType;
+import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.bind.annotation.Scope;
 import org.zkoss.bind.annotation.ScopeParam;
@@ -20,12 +20,15 @@ import org.zkoss.zul.Messagebox;
 
 import sistema.vendas.server.beans.comprador.Comprador;
 import sistema.vendas.server.beans.comprador.CompradorFacadeBean;
+import sistema.vendas.util.CnpjCpf;
 import sistema.vendas.util.ObjetoSessao;
 
  
 public class InserirClienteVM {
 	
 	private InitialContext ctx;
+
+	private String cpf;
 	
 	private Comprador comprador;
 	private CompradorFacadeBean compradorFacadeBean;
@@ -48,9 +51,11 @@ public class InserirClienteVM {
 	
 	@Init
 	public void init(@ScopeParam(scopes = Scope.SESSION, value = "objetoSessao") ObjetoSessao os) {
-		if (os.getUsuarioId() == null) {
-			Executions.sendRedirect("login.zul");
-		}else {
+		if (os == null) {
+			Executions.sendRedirect("index.zul");
+	    }else if(os.getUsuarioId() > 1){
+			Executions.sendRedirect("index.zul");
+	    }else {
 			objetoSessao = os;
 			comprador = new Comprador();
 		}
@@ -67,28 +72,46 @@ public class InserirClienteVM {
 	public void prosseguir() {
 		comprador = new Comprador();
 		try {
-			if(comprador.getCpf().trim() != null) {
-				try {
-					comprador = compradorFacadeBean.findByCpf(comprador.getCpf().trim());
-					
-					if(comprador.getCompradorId() != null) {
-						objetoSessao.setCompradorId(comprador.getCompradorId());
-						Executions.sendRedirect("caixa.zul");
-					}
-					
-				}catch(NullPointerException exp) {
-					exp.printStackTrace();
-	
-				}
+			if(cpf.trim() != null) {
+				if(CnpjCpf.isValidCPF(cpf.trim())) {
+					 
+						try {
+							comprador = compradorFacadeBean.findByCpf(cpf.trim());
+						}catch(Exception exp) {
+							exp.printStackTrace();
+						}
+						
+						try {
+							
+							if(comprador != null && comprador.getCompradorId() != null) {
+								objetoSessao.setCompradorId(comprador.getCompradorId());
+								Executions.sendRedirect("caixa.zul");
+							}else {
+								comprador = new Comprador();
+								comprador.setCpf(cpf.trim());
+								
+								comprador = compradorFacadeBean.incluir(comprador);
+								objetoSessao.setCompradorId(comprador.getCompradorId());
+								Executions.sendRedirect("caixa.zul");
+							}
+							
+						}catch(Exception exp) {
+							exp.printStackTrace();
+			
+						}
+				 }else {
+				 	Clients.showNotification("CPF Inválido!", Clients.NOTIFICATION_TYPE_WARNING, null, null, 2500);
+			 	}
 				
 			}
 			
 		}catch(NullPointerException exp) {
+			//TODO: Criar um usuário 
+			objetoSessao.setCompradorId(99);
 			Executions.sendRedirect("caixa.zul");
-			Clients.showNotification("CPF Não consta em nossa base de dados!", Clients.NOTIFICATION_TYPE_WARNING, null, null, 2500);
-
+			//Clients.showNotification("CPF Nulo!", Clients.NOTIFICATION_TYPE_WARNING, null, null, 2500);
+			//exp.printStackTrace();
 		}
-		
 	}
 
 	@Command
@@ -105,9 +128,14 @@ public class InserirClienteVM {
 	public void setComprador(Comprador comprador) {
 		this.comprador = comprador;
 	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
 	
 
-	
-	
-	
 }

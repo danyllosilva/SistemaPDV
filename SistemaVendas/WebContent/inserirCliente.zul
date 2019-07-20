@@ -78,7 +78,7 @@
 	<center>
 			<div   style="padding-top: 48px; text-align: center;">
 			<label>CPF Comprador: </label>
-			<textbox value="@bind(vm.comprador.cpf)" placeholder="000.000.000-00" />
+			<textbox value="@bind(vm.cpf)" placeholder="000.000.000-00"  maxlength="11"/>
 			<button class="btn-primary" onClick="@command('prosseguir')">Prosseguir</button>
 			</div>
 	</center>
