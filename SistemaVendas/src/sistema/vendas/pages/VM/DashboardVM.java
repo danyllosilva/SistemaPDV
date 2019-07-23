@@ -82,7 +82,9 @@ public class DashboardVM {
 	@Command
 	@NotifyChange("*")
 	public void secaoProduto() {
-		winProduto.doModal();
+		Sessions.getCurrent().setAttribute("objetoSessao", obj);
+		Executions.sendRedirect("produto.zul");
+		 
 	}
 	
 
