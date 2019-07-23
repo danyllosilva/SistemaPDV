@@ -1,0 +1,111 @@
+<?page title="Categoria Produto" contentType="text/html;charset=UTF-8"?>
+<zk xmlns:x="xhtml" xmlns:n="native" xmlns:w="client" xmlns:ca="client/attribute" xmlns:z="zk">
+<!-- CSS -->
+	<n:link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <n:link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" 
+    	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+   	<n:link href="https://fonts.googleapis.com/css?family=Lato|Roboto" rel="stylesheet"/>
+	 
+	<style>
+		.zero-pd-left{
+	    	padding-left:0px;		    
+	    }
+		@media(min-width:991px) {
+		    .zero-pd-left2{
+		    	padding-left:0px;		    
+		    }
+		}
+		@media(min-width:600px) {
+			.h1-1{
+				font-size: 6vw;
+			}
+			.h2-1{
+				font-size: 2.5vw;
+			}
+		}
+		@media(max-width:600px) {
+		    .max-altura{
+		    	height:450px;		    
+		    }
+		    .max-width{
+		    	width:100%;
+		    }
+		    .to-center {
+			    padding-right: 11%;
+			}
+			.h1{
+				font-size: 12;
+			}
+			.h2{
+				font-size: 5vw;
+			}
+			.wd-title{
+				width:100%
+			}
+		}
+		html{
+		  width: 100%; 
+		  height:100%; 
+		  overflow:hidden;
+		}
+		body{
+		  width: 100%; 
+		  height:100%; 
+		  overflow:hidden;
+			padding:0px;
+			font-family: "Lato";
+		}
+		a{
+			color: white;
+		}
+		.z-temp, .z-modal-mask {
+		    width: 100%;
+		    height: 100%;
+		    background: rgb(0,0,0);
+		    opacity: .85;
+		    filter: alpha(opacity=60);
+		    position: absolute;
+		    top: 0;
+		    left: 0;
+		}
+		a:visited, a:hover, a:active{
+			color: white;
+			font-weight: bold;
+		}
+	</style>
+		<window viewModel="@id('vm') @init('sistema.vendas.pages.VM.CategoriaProdutoVM')" id="winCategoriaProduto"   position="center" border="none"  
+				 visible="true" width="auto" height="600px"   style="border:none; padding: 0px;" >
+				
+				<listbox id="listaDeCategoriasBanco" model="@bind(vm.categoriasProdutos)" mold="paging"   pageSize="6"  selectedItem="@bind(vm.categoriaProduto)">
+					<listhead>
+						<listheader>ID</listheader>
+						<listheader>Nome</listheader>
+					</listhead>
+					<template name="model" var="item">
+						<listitem>
+							<listcell label="@load(item.categoriaProdutoId)"/>
+							<listcell label="@load(item.nome)"/>
+						</listitem>
+					</template>
+				</listbox>
+				
+			<div>
+				<vbox>
+					<label>Nome: </label>
+					<textbox value="@bind(vm.categoriaProduto.nome)"></textbox>
+					<hbox>
+						<button visible="@bind(vm.salvarVisible)" class="btn-success" onClick="@command('salvarNovaCategoriaProduto')">Salvar</button>
+						<button visible="@bind(vm.salvarVisible)" class="btn-warning" onClick="@command('cancelarSalvarNovaCategoriaProduto')">Cancelar</button>
+					</hbox>
+				</vbox>
+				
+				
+				<div align="right">
+				<button class="btn-primary"  onClick="@command('cadastrarCategoriaProduto')">Novo</button>
+				<button class="btn-warning"  disabled="@bind(vm.desabilitadorBtns)" onClick="@command('editarCategoriaProduto')">Atualizar</button>
+				<button class="btn-danger"  disabled="@bind(vm.desabilitadorBtns)" onClick="@command('removerCategoriaProduto')">Excluir</button>
+				</div>
+			</div>
+				
+		</window>
+</zk>
