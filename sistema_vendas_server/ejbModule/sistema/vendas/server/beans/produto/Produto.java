@@ -40,7 +40,7 @@ public class Produto implements Serializable{
 	@Column(name="quantidade")
 	private Integer quantidade;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="categoria_produto_id", referencedColumnName="categoria_produto_id")
 	private CategoriaProduto categoriaProduto;
 	
