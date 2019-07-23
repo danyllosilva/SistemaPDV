@@ -3,6 +3,7 @@ package sistema.vendas.server.beans.produto;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,7 +40,7 @@ public class Produto implements Serializable{
 	@Column(name="quantidade")
 	private Integer quantidade;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="categoria_produto_id", referencedColumnName="categoria_produto_id")
 	private CategoriaProduto categoriaProduto;
 	

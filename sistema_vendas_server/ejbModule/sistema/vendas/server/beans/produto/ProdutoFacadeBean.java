@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import sistema.vendas.server.beans.categoriaproduto.CategoriaProduto;
+
 @Stateless(name=ProdutoFacadeBean.NAME)
 public class ProdutoFacadeBean {
 	public static final String NAME = "sistema_vendas_server_ProdutoFacadeBean";
@@ -48,5 +50,16 @@ public class ProdutoFacadeBean {
 		}
 		
 		return produtos;
+	}
+	
+	public void removerByCategoria(CategoriaProduto categoriaProduto) {
+		StringBuffer sql = new StringBuffer();
+		
+		sql.append("DELETE FROM produto WHERE produto.categoria_produto_id = "+categoriaProduto.getCategoriaProdutoId()+" ");
+		
+		Query q = manager.createNativeQuery(sql.toString());
+		q.executeUpdate();
+
+		return;
 	}
 }
