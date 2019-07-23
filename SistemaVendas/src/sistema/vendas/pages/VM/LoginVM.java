@@ -73,7 +73,12 @@ public class LoginVM {
 						
 						//CAIXA
 						if(usuario.getTipoUsario() == 1) {
-							Executions.sendRedirect("inserirCliente.zul");
+						//	Executions.sendRedirect("inserirCliente.zul");
+						}
+						
+						//ADMIN
+						if(usuario.getTipoUsario() == 1) {
+							Executions.sendRedirect("dashboard.zul");
 						}
 						
 					
