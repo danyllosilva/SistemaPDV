@@ -8,8 +8,6 @@ import sistema.vendas.server.beans.cesta.Cesta;
 import sistema.vendas.server.beans.comprador.Comprador;
 import sistema.vendas.server.beans.registrovendas.RegistroVendas;
 
-
-
 public class UtilDocumento {
 
 	static SimpleDateFormat dataDoc = new SimpleDateFormat("dd' de 'MMMMMMMM' de 'yyyy' às 'HH:mm:ss",
