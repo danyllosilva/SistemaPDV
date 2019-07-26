@@ -1,34 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry exported="true" kind="src" path="/sistema_vendas_server">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jst.server.core.container/org.jboss.ide.eclipse.as.core.server.runtime.runtimeTarget/WildFly 13.0 Runtime">
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="src" path="/sistema_vendas_server"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.jboss.ide.eclipse.as.core.server.runtime.runtimeTarget/WildFly 13.0 Runtime">
 		<attributes>
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/java-8-oracle">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/java-8-oracle">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/zk/Documents/ARQUIVOS DE WORKSPACES/GIT Projects/SistemaPDV/jar_files/zk-8.5.0.jar"/>
-	<classpathentry kind="lib" path="/home/zk/Documents/ARQUIVOS DE WORKSPACES/GIT Projects/SistemaPDV/jar_files/zkbind-8.5.0.jar"/>
-	<classpathentry kind="lib" path="/home/zk/Documents/ARQUIVOS DE WORKSPACES/GIT Projects/SistemaPDV/jar_files/zcommon-8.5.0.jar"/>
-	<classpathentry kind="lib" path="/home/zk/Documents/ARQUIVOS DE WORKSPACES/GIT Projects/SistemaPDV/jar_files/zul.jar"/>
-	<classpathentry kind="lib" path="/home/zk/Documents/ARQUIVOS DE WORKSPACES/GIT Projects/SistemaPDV/jar_files/closure-compiler-v20170626.jar"/>
-	<classpathentry kind="lib" path="/home/zk/Documents/ARQUIVOS DE WORKSPACES/GIT Projects/SistemaPDV/jar_files/pd4ml.jar"/>
-	<classpathentry kind="lib" path="/home/zk/Documents/ARQUIVOS DE WORKSPACES/GIT Projects/SistemaPDV/jar_files/postgresql-9.4-1202-jdbc4.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="/home/zk/Documents/ARQUIVOS DE WORKSPACES/GIT Projects/SistemaPDV/jar_files/undertow-servlet-1.4.16.Final.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

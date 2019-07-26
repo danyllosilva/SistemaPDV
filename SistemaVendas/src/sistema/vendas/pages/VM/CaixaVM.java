@@ -7,6 +7,7 @@ import java.util.Date;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+
 import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
@@ -18,7 +19,6 @@ import org.zkoss.bind.annotation.ScopeParam;
 import org.zkoss.util.media.AMedia;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.SuspendNotAllowedException;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
@@ -113,15 +113,7 @@ public class CaixaVM {
 	@NotifyChange("*")
 	public void adicionar() {
 		winListagemBanco.setClosable(true);
-		try {
-			winListagemBanco.doModal();
-		} catch (SuspendNotAllowedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		winListagemBanco.doModal();
 		
 		produtosBanco = produtoFacadeBean.findAll();
 		
@@ -196,15 +188,7 @@ public class CaixaVM {
 	@NotifyChange("*")
 	public void finalizar() {
 		 formasPagamentos = formaPagamentoFacadeBean.findAll();
-		 try {
-			winListagemFormasPagamento.doModal();
-		} catch (SuspendNotAllowedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		 winListagemFormasPagamento.doModal();
 		
 	}
 
@@ -229,7 +213,6 @@ public class CaixaVM {
 							String notaFiscal = UtilDocumento.gerarNotaFiscalCompra(registroVenda.getComprador(), registroVenda,  (ArrayList<Cesta>) produtosAComprarCesta , valorTotalCarrinho);
 							PDFUtil pdfUtil = new PDFUtil();
 							final InputStream mediais = pdfUtil.gerarPdf(notaFiscal , "NotaFiscal.pdf");
-							@SuppressWarnings("unused")
 							final AMedia amedia = new AMedia("Protocolo.pdf", "pdf", "application/pdf", mediais);
 							
 							winListagemFormasPagamento.setVisible(false);

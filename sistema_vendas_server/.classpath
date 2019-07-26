@@ -12,12 +12,5 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/zk/Documents/ARQUIVOS DE WORKSPACES/GIT Projects/SistemaPDV/jar_files/hibernate-jpa-2.1-api-1.0.2.Final.jar"/>
-	<classpathentry kind="lib" path="/home/zk/Documents/ARQUIVOS DE WORKSPACES/GIT Projects/SistemaPDV/jar_files/postgresql-9.4-1202-jdbc4.jar"/>
-	<classpathentry kind="lib" path="/home/zk/Documents/ARQUIVOS DE WORKSPACES/GIT Projects/SistemaPDV/jar_files/undertow-servlet-1.4.16.Final.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.dependency" value="../"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

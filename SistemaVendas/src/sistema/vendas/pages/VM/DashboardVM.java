@@ -17,7 +17,6 @@ import org.zkoss.bind.annotation.ScopeParam;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
-import org.zkoss.zk.ui.SuspendNotAllowedException;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Listbox;
@@ -92,15 +91,7 @@ public class DashboardVM {
 	@Command
 	@NotifyChange("*")
 	public void secaoRelatorio() {
-		try {
-			winRelatorio.doModal();
-		} catch (SuspendNotAllowedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		winRelatorio.doModal();
 	}
 	
 	
