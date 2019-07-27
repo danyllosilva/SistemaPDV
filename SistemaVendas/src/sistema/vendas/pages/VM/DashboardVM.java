@@ -55,7 +55,7 @@ public class DashboardVM {
 		
 		if (os == null) {
 			Executions.sendRedirect("index.zul");
-		}else if(os.getUsuarioId() != 1){//TODO SET TO :2
+		}else if(os.getUsuarioId() != 2){
 			Executions.sendRedirect("index.zul");
 		}else {
 			obj = os;

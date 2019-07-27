@@ -61,10 +61,11 @@ public class ProdutoVM {
 		
 		if (os == null) {
 			Executions.sendRedirect("index.zul");
-		}else if(os.getUsuarioId() != 1){//TODO SET TO :2
+		}else if(os.getUsuarioId() != 2){//TODO SET TO :2
 			Executions.sendRedirect("index.zul");
 		}else {
 			obj = os;
+			produto = new Produto();
 			produtos = produtoFacadeBean.findAll();
 			categoriasProduto = categoriaProdutoFacadeBean.findAll();
 		}
@@ -94,6 +95,9 @@ public class ProdutoVM {
 		try {
 			if(produto != null) {
 				if(produto.getNome() != null && produto.getCodigoProdutoId() == null && produto.getQuantidade() > 0) {
+					if(produto.getCategoriaProduto() != null) {
+						produto.setCategoriaProdutoId(produto.getCategoriaProduto().getCategoriaProdutoId());
+					}
 					produto = produtoFacadeBean.incluir(produto);
 					produto = new Produto();
 					desabilitadorBtns = false;
@@ -119,6 +123,9 @@ public class ProdutoVM {
 	@NotifyChange("*")
 	public void editarProduto() {
 		if(produto != null && produto.getCodigoProdutoId() != null) {
+			if(produto.getCategoriaProduto() != null) {
+				produto.setCategoriaProdutoId(produto.getCategoriaProduto().getCategoriaProdutoId());
+			}
 			produto = produtoFacadeBean.update(produto);
 		}
 	}
