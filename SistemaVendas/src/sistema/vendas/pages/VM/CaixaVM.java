@@ -118,9 +118,6 @@ public class CaixaVM {
 		} catch (SuspendNotAllowedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 		produtosBanco = produtoFacadeBean.findAll();
@@ -199,9 +196,6 @@ public class CaixaVM {
 		 try {
 			winListagemFormasPagamento.doModal();
 		} catch (SuspendNotAllowedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
