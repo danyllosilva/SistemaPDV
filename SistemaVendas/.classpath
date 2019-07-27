@@ -13,22 +13,16 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/java-8-oracle">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/zk/Documents/ARQUIVOS DE WORKSPACES/GIT Projects/SistemaPDV/jar_files/zk-8.5.0.jar"/>
-	<classpathentry kind="lib" path="/home/zk/Documents/ARQUIVOS DE WORKSPACES/GIT Projects/SistemaPDV/jar_files/zkbind-8.5.0.jar"/>
-	<classpathentry kind="lib" path="/home/zk/Documents/ARQUIVOS DE WORKSPACES/GIT Projects/SistemaPDV/jar_files/zcommon-8.5.0.jar"/>
-	<classpathentry kind="lib" path="/home/zk/Documents/ARQUIVOS DE WORKSPACES/GIT Projects/SistemaPDV/jar_files/zul.jar"/>
-	<classpathentry kind="lib" path="/home/zk/Documents/ARQUIVOS DE WORKSPACES/GIT Projects/SistemaPDV/jar_files/closure-compiler-v20170626.jar"/>
-	<classpathentry kind="lib" path="/home/zk/Documents/ARQUIVOS DE WORKSPACES/GIT Projects/SistemaPDV/jar_files/pd4ml.jar"/>
-	<classpathentry kind="lib" path="/home/zk/Documents/ARQUIVOS DE WORKSPACES/GIT Projects/SistemaPDV/jar_files/postgresql-9.4-1202-jdbc4.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="/home/zk/Documents/ARQUIVOS DE WORKSPACES/GIT Projects/SistemaPDV/jar_files/undertow-servlet-1.4.16.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/zk/Desktop/SistemaPDV/jar_files/zk-8.5.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/zk/Desktop/SistemaPDV/jar_files/zkbind-8.5.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/zk/Desktop/SistemaPDV/jar_files/zul-8.5.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/zk/Desktop/SistemaPDV/jar_files/zcommon-8.5.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/zk/Desktop/SistemaPDV/jar_files/closure-compiler-v20170626.jar"/>
+	<classpathentry kind="lib" path="C:/Users/zk/Desktop/SistemaPDV/jar_files/pd4ml.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
