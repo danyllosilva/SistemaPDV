@@ -40,8 +40,11 @@ public class Produto implements Serializable{
 	@Column(name="quantidade")
 	private Integer quantidade;
 	
-	@ManyToOne
-	@JoinColumn(name="categoria_produto_id", referencedColumnName="categoria_produto_id")
+	//@ManyToOne
+	//@JoinColumn(name="categoria_produto_id", referencedColumnName="categoria_produto_id")
+	private Integer categoriaProdutoId;
+	
+	@Transient
 	private CategoriaProduto categoriaProduto;
 	
 	@Transient
@@ -98,6 +101,17 @@ public class Produto implements Serializable{
 	public void setCategoriaProduto(CategoriaProduto categoriaProduto) {
 		this.categoriaProduto = categoriaProduto;
 	}
+
+	public Integer getCategoriaProdutoId() {
+		return categoriaProdutoId;
+	}
+
+	public void setCategoriaProdutoId(Integer categoriaProdutoId) {
+		this.categoriaProdutoId = categoriaProdutoId;
+	}
+	
+	
+	
 	
 	/****
 	 * 	INSERT INTO public.produto(codigo_produto_id,nome,preco,quantidade,

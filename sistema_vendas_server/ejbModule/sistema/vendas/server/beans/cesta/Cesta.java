@@ -27,8 +27,11 @@ public class Cesta implements Serializable {
 	@Column(name="cesta_id")
 	private Integer cestaId;
 	
-	@ManyToOne
-	@JoinColumn(name="codigo_produto_id", referencedColumnName="codigo_produto_id")
+	//@ManyToOne
+	//@JoinColumn(name="codigo_produto_id", referencedColumnName="codigo_produto_id")
+	private Integer produtoId;
+	
+	@Transient
 	private Produto produto;
 	
 	@Column(name="quantidade")
@@ -80,6 +83,14 @@ public class Cesta implements Serializable {
 
 	public void setProduto(Produto produto) {
 		this.produto = produto;
+	}
+
+	public Integer getProdutoId() {
+		return produtoId;
+	}
+
+	public void setProdutoId(Integer produtoId) {
+		this.produtoId = produtoId;
 	}
 	
 	

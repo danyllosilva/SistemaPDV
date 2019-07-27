@@ -58,7 +58,7 @@ public class CategoriaProdutoVM {
 		
 		if (os == null) {
 			Executions.sendRedirect("index.zul");
-		}else if(os.getUsuarioId() != 1){//TODO SET TO :2
+		}else if(os.getUsuarioId() != 2){
 			Executions.sendRedirect("index.zul");
 		}else {
 			categoriaProduto = new CategoriaProduto();
@@ -119,7 +119,7 @@ public class CategoriaProdutoVM {
 	public void removerCategoriaProduto() {
 		if(categoriaProduto != null && categoriaProduto.getCategoriaProdutoId() != null) {
 			try {
-				produtoFacadeBean.removerByCategoria(categoriaProduto);
+				//produtoFacadeBean.removerByCategoria(categoriaProduto);
 				categoriaProdutoFacadeBean.remover(categoriaProduto);
 				
 				categoriasProdutos.remove(categoriaProduto);
