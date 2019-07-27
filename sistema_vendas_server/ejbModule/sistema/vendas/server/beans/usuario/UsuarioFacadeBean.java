@@ -61,4 +61,13 @@ public class UsuarioFacadeBean {
 		return usuario;
 		
 	}
+	
+	
+	/**
+	 * INSERT INTO public.usuario(
+	usuario_id, login, nome, senha, tipo_usuario)
+	VALUES (1, 'levimmartins@gmail.com', 'Levi', '123', 1),
+	       (2, 'admin', 'Admin', '123', 2)
+	 * 
+	 * ***/
 }
