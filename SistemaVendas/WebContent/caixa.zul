@@ -134,6 +134,8 @@
 				</template>
 			</listbox>
 			 <div>
+			 	  <label>Buscar por Código</label>
+			 	  <intbox value="@bind(vm.codProduto)" />
 				  <hbox>
 					<label>Descrição Produto:</label> 
 					<label value="@bind(vm.produtoBanco.nome)"/>
@@ -145,24 +147,22 @@
 			</div>
 			    
 			<div align="right">
+				<button class="btn-warning" onClick="@command('buscarPorCodigoProduto')">Buscar</button>
 				<button class="btn-primary" onClick="@command('adicionarNoCarrinho')">Adicionar</button>
 			</div>
 			</window>
 			
 			<window id="winListagemFormasPagamento"  title="Formato Pagamento"  position="center" border="normal" 
 			closable="true" visible="false" width="800px" height="600px" onClose="self.visible=false;event.stopPropagation();" >
-				
-				<listbox id="listaDeFormasPagamento" model="@bind(vm.formasPagamentos)" mold="paging" autopaging="true" pageSize="6"  selectedItem="@bind(vm.formaPagamento)">
-				<listhead>
-					<listheader>Descrição</listheader>
-				</listhead>
-				<template name="model" var="item">
-					<listitem>
-						<listcell label="@load(item.descricao)"/>
-					</listitem>
-				</template>
-			</listbox>
-			 <div>
+			<div>	 
+					<label>Forma de Pagamento</label>
+					<selectbox model="@bind(vm.model)" sclass="form-group"  >
+						<template name="model" var="item2">
+							 <label value="@load(item2Status.current)"/>
+						</template>
+					</selectbox>
+					
+			 
 				  <hbox>
 					<label>Quantidade de Parcelas:</label> 
 					<intbox value="@bind(vm.quantidadeParcelasDesejadas)"/>
