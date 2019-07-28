@@ -17,7 +17,7 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Wire;
-//import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Window;
 
 import sistema.vendas.server.beans.categoriaproduto.CategoriaProduto;

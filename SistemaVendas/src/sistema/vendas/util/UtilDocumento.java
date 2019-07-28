@@ -8,6 +8,8 @@ import sistema.vendas.server.beans.cesta.Cesta;
 import sistema.vendas.server.beans.comprador.Comprador;
 import sistema.vendas.server.beans.registrovendas.RegistroVendas;
 
+
+
 public class UtilDocumento {
 
 	static SimpleDateFormat dataDoc = new SimpleDateFormat("dd' de 'MMMMMMMM' de 'yyyy' às 'HH:mm:ss",
@@ -16,11 +18,11 @@ public class UtilDocumento {
 	static SimpleDateFormat dataDocSemHoras = new SimpleDateFormat("dd' de 'MMMMMMMM' de 'yyyy", new Locale("pt", "BR"));
 	
 	
-	public static String gerarNotaFiscalCompra(Comprador comprador, RegistroVendas registroVenda, ArrayList<Cesta> cesta, Double valorTotal) {
+	public static String gerarNotaFiscalCompra(Comprador comprador, RegistroVendas registroVenda, ArrayList<Cesta> cesta, Double valorTotal, String formaPagamentoNome) {
 		StringBuffer html = new StringBuffer();
 		
-		String nomeComprador = "SEM NOME REGISTRADO";
-		String cpfComprador = ""; 
+		String nomeComprador;
+		String cpfComprador;
 		
 		try {
 			cpfComprador = comprador.getCpf();
@@ -28,7 +30,12 @@ public class UtilDocumento {
 			 
 		}catch(NullPointerException exp) {
 			exp.printStackTrace();
+			 nomeComprador = "SEM NOME REGISTRADO";
+			 cpfComprador = ""; 
 		}
+		
+		
+		
 		html.append(
 				"  <!DOCTYPE html5>    " + 
 				"<html>    " + 
@@ -90,7 +97,7 @@ public class UtilDocumento {
 				"		</div>     " + 
 				"		<div id=\"block1\">    " + 
 				"				<div align=\"left\">    " + 
-				"					<h4 >Comprador nº CPF " +comprador.getCpf()+"</h4>    " + 
+				"					<h4 >Comprador nº CPF " +cpfComprador+"</h4>    " + 
 				"					<h4>Comprador Nome: "+nomeComprador+"</h4>    " + 
 				"					<h4>Cód. Registro de Venda: "+registroVenda.getRegistroVendasId()+"</h4>    " + 
 				"					<h4>Data Venda: "+ new String(dataDocSemHoras.format(registroVenda.getDataVenda().getTime()))+" </h4>    " + 
@@ -119,7 +126,7 @@ public class UtilDocumento {
 												+ ""
 												+ "<h3>Forma de Pagamento: </h3>  "
 												+ "<p>"
-												+ ""+registroVenda.getFormaPagamento().getDescricao()+""
+												+ ""+formaPagamentoNome+""
 												+ "</p>");
 				
 				html.append(

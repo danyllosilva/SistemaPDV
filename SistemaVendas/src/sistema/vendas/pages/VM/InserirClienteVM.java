@@ -23,6 +23,7 @@ import sistema.vendas.server.beans.comprador.CompradorFacadeBean;
 import sistema.vendas.util.CnpjCpf;
 import sistema.vendas.util.ObjetoSessao;
 
+ 
 public class InserirClienteVM {
 	
 	private InitialContext ctx;
@@ -43,7 +44,7 @@ public class InserirClienteVM {
 				compradorFacadeBean = (CompradorFacadeBean) ctx.lookup(GLOBAL_JNDI+CompradorFacadeBean.JNDI);
 				
 			} catch (NamingException e) {
-				
+				Messagebox.show(e.getMessage(), "Erro Lookup", Messagebox.OK, Messagebox.EXCLAMATION);
 				e.printStackTrace();
 			}
 	}
