@@ -7,6 +7,7 @@ import java.util.Date;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+
 import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
@@ -18,10 +19,10 @@ import org.zkoss.bind.annotation.ScopeParam;
 import org.zkoss.util.media.AMedia;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.SuspendNotAllowedException;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Window;
 
 
@@ -29,12 +30,20 @@ import sistema.vendas.server.beans.cesta.Cesta;
 import sistema.vendas.server.beans.cesta.CestaFacadeBean;
 import sistema.vendas.server.beans.comprador.Comprador;
 import sistema.vendas.server.beans.comprador.CompradorFacadeBean;
-import sistema.vendas.server.beans.formapagamento.FormaPagamento;
-import sistema.vendas.server.beans.formapagamento.FormaPagamentoFacadeBean;
 import sistema.vendas.server.beans.produto.Produto;
 import sistema.vendas.server.beans.produto.ProdutoFacadeBean;
 import sistema.vendas.server.beans.registrovendas.RegistroVendas;
 import sistema.vendas.server.beans.registrovendas.RegistroVendasFacadeBean;
+import sistema.vendas.server.formaPagamento.AmericanExpress;
+import sistema.vendas.server.formaPagamento.Debito;
+import sistema.vendas.server.formaPagamento.Dinheiro;
+import sistema.vendas.server.formaPagamento.Elo;
+import sistema.vendas.server.formaPagamento.FormaPagamento;
+import sistema.vendas.server.formaPagamento.MasterCard;
+import sistema.vendas.server.formaPagamento.Ticket;
+import sistema.vendas.server.formaPagamento.TipoPagamento;
+import sistema.vendas.server.formaPagamento.TipoPagamento.tipo;
+import sistema.vendas.server.formaPagamento.Visa;
 import sistema.vendas.util.ObjetoSessao;
 import sistema.vendas.util.PDFUtil;
 import sistema.vendas.util.UtilDocumento;
@@ -53,21 +62,22 @@ public class CaixaVM {
 	private Integer quantidade;
 	private Integer quantidadeParcelasDesejadas;
 	private Double valorTotalCarrinho = 0.00;
-	private FormaPagamento formaPagamento;
 	
 	private Cesta cesta;
 	private RegistroVendas registroVenda;
 	
 	private ProdutoFacadeBean produtoFacadeBean;
-	private FormaPagamentoFacadeBean formaPagamentoFacadeBean;
 	private CompradorFacadeBean compradorFacadeBean;
 	private RegistroVendasFacadeBean registroVendaFacadeBean;
 	private CestaFacadeBean cestaFacadeBean;
 	
 	private Collection<Cesta> produtosAComprarCesta;
-	private Collection<FormaPagamento> formasPagamentos;
 	private Collection<Produto> produtosAdicionadosCaixa;
 	private Collection<Produto> produtosBanco;
+	private Integer codProduto = new Integer(0);
+	
+	private String[] userList = { "Dinheiro", "Débito" ,"Ticket", "MasterCard", "Visa", "Elo", "American Express", "Credicard" };
+	private ListModelList model = new ListModelList(userList);
 	
 	@Wire("#winListagemBanco")
 	private Window winListagemBanco;
@@ -79,7 +89,6 @@ public class CaixaVM {
 		try {
 			ctx = new InitialContext();
 			produtoFacadeBean = (ProdutoFacadeBean)ctx.lookup(GLOBAL_JNDI+ProdutoFacadeBean.JNDI);
-			formaPagamentoFacadeBean = (FormaPagamentoFacadeBean) ctx.lookup(GLOBAL_JNDI+FormaPagamentoFacadeBean.JNDI);
 			compradorFacadeBean = (CompradorFacadeBean) ctx.lookup(GLOBAL_JNDI+CompradorFacadeBean.JNDI);
 			registroVendaFacadeBean = (RegistroVendasFacadeBean) ctx.lookup(GLOBAL_JNDI+RegistroVendasFacadeBean.JNDI);
 			cestaFacadeBean = (CestaFacadeBean) ctx.lookup(GLOBAL_JNDI+CestaFacadeBean.JNDI);
@@ -113,12 +122,7 @@ public class CaixaVM {
 	@NotifyChange("*")
 	public void adicionar() {
 		winListagemBanco.setClosable(true);
-		try {
-			winListagemBanco.doModal();
-		} catch (SuspendNotAllowedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		winListagemBanco.doModal();
 		
 		produtosBanco = produtoFacadeBean.findAll();
 		
@@ -131,6 +135,25 @@ public class CaixaVM {
 			produtosAComprarCesta = new ArrayList<Cesta>();
 		}
 		
+	}
+	
+	@Command
+	@NotifyChange("*")
+	public void buscarPorCodigoProduto() {
+		try {
+			if(codProduto != null && codProduto>0) {
+				produtoBanco = produtoFacadeBean.findByPrimaryKey(codProduto);
+				if(produtoBanco == null) {
+					Clients.showNotification("Não existe produto para o cód. informado!", Clients.NOTIFICATION_TYPE_WARNING, null, null, 2500);
+				}
+			}else {
+				produtoBanco = new Produto();
+				Clients.showNotification("Não existe produto para o cód. informado!", Clients.NOTIFICATION_TYPE_WARNING, null, null, 2500);
+			}
+		}catch(Exception exp) {
+			exp.printStackTrace();
+
+		}
 	}
 	
 	@Command
@@ -192,13 +215,7 @@ public class CaixaVM {
 	@Command
 	@NotifyChange("*")
 	public void finalizar() {
-		 formasPagamentos = formaPagamentoFacadeBean.findAll();
-		 try {
-			winListagemFormasPagamento.doModal();
-		} catch (SuspendNotAllowedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		 winListagemFormasPagamento.doModal();
 		
 	}
 
@@ -206,24 +223,98 @@ public class CaixaVM {
 	@NotifyChange("*")
 	public void finalizarCompra() {
 		try {
+			
+			FormaPagamento formaPagamento = null;
+			Integer tipoPagamento = null;
+			if(model.getSelection().toString().equals("[Dinheiro]")) {
+				formaPagamento = new Dinheiro();
+				tipoPagamento = TipoPagamento.tipo.Dinheiro.ordinal();	
+				
+			}
+			
+			if(model.getSelection().toString().equals("[Débito]")) {
+				formaPagamento = new Debito();
+				tipoPagamento = TipoPagamento.tipo.Debito.ordinal();
+				
+			}
+			
+			if(model.getSelection().toString().equals("[Ticket]")) {
+				formaPagamento = new Ticket();
+				tipoPagamento = TipoPagamento.tipo.Ticket.ordinal();
+			}
+			
+			if(model.getSelection().toString().equals("[MasterCard]")) {
+				formaPagamento = new MasterCard();
+				tipoPagamento = TipoPagamento.tipo.MasterCard.ordinal();
+			}
+			
+			if(model.getSelection().toString().equals("[Visa]")) {
+				formaPagamento = new Visa();
+				tipoPagamento = TipoPagamento.tipo.Visa.ordinal();
+
+			}
+			
+			if(model.getSelection().toString().equals("[Elo]")) {
+				formaPagamento = new Elo();
+				tipoPagamento = TipoPagamento.tipo.Elo.ordinal();
+
+			}
+			 
+			if(model.getSelection().toString().equals("[American Express]")) {
+				formaPagamento = new AmericanExpress();
+				tipoPagamento = TipoPagamento.tipo.AmericanExpress.ordinal();
+
+			}
+			
+			if(model.getSelection().toString().equals("[Credicard]")) {
+				formaPagamento = new AmericanExpress();
+				tipoPagamento = TipoPagamento.tipo.Credicard.ordinal();
+			}
+			
+			if(!formaPagamento.quantidadeParcelasValidas(quantidadeParcelasDesejadas)) {
+				Clients.showNotification("Número de Parcelas Inválido!", Clients.NOTIFICATION_TYPE_WARNING, null, null, 2500);
+				return;
+			}
+			 
+			
 			if(produtosAComprarCesta.size()>0) {
-				if(formaPagamento != null && formaPagamento.getFormaPagamentoId() != null) {
-					
-						registroVenda.setFormaPagamento(formaPagamento);
+						registroVenda.setFormaPagamentoId(tipoPagamento);
 						registroVenda.setDataVenda(new Date());
 						
-						
 						try {
-							registroVenda = registroVendaFacadeBean.incluir(registroVenda);
-							
+								registroVenda = registroVendaFacadeBean.incluir(registroVenda);
+								try {
+									if(formaPagamento != null && quantidadeParcelasDesejadas != null) {
+										 
+										
+										for(Cesta c: produtosAComprarCesta) {
+											System.out.println("Quantidade: "+quantidadeParcelasDesejadas.intValue());
+											System.out.println(formaPagamento.parcelar(c.getValorTotal(), quantidadeParcelasDesejadas.intValue()));
+											c.setValorComDescontoFormaPagamento(formaPagamento.parcelar(c.getValorTotal(), quantidadeParcelasDesejadas.intValue()));
+										}
+									}
+								}catch (Exception e) {
+									e.printStackTrace();
+									Clients.showNotification("Forma de Pagamento Inválida / Número de Parcelas Inválido!", Clients.NOTIFICATION_TYPE_WARNING, null, null, 2500);
+
+								}
+								
+							Produto p;	
 							for(Cesta c: produtosAComprarCesta) {
+								c.setProdutoId(c.getProduto().getCodigoProdutoId());
 								c = cestaFacadeBean.incluir(c);
+								
+								
+								p = c.getProduto();
+								p = produtoFacadeBean.findByPrimaryKey(p.getCodigoProdutoId());
+								p.setQuantidade(p.getQuantidade() - c.getQuantidade());
+								produtoFacadeBean.update(p);
+								
 							}
 							
-							String notaFiscal = UtilDocumento.gerarNotaFiscalCompra(registroVenda.getComprador(), registroVenda,  (ArrayList<Cesta>) produtosAComprarCesta , valorTotalCarrinho);
+							String notaFiscal = UtilDocumento.gerarNotaFiscalCompra(registroVenda.getComprador(), registroVenda,  (ArrayList<Cesta>) produtosAComprarCesta , valorTotalCarrinho, model.getSelection().toString());
 							PDFUtil pdfUtil = new PDFUtil();
 							final InputStream mediais = pdfUtil.gerarPdf(notaFiscal , "NotaFiscal.pdf");
-							@SuppressWarnings("unused")
 							final AMedia amedia = new AMedia("Protocolo.pdf", "pdf", "application/pdf", mediais);
 							
 							winListagemFormasPagamento.setVisible(false);
@@ -235,13 +326,10 @@ public class CaixaVM {
 							exp.printStackTrace();
 						}
 					
-				}else {
-					Clients.showNotification("Selecione a forma de pagamento!", Clients.NOTIFICATION_TYPE_WARNING, null, null, 2500);
-				}
 			}else {
 				Clients.showNotification("Não há produtos no carrinho!", Clients.NOTIFICATION_TYPE_WARNING, null, null, 2500);
 
-			}
+			}  
 		}catch(Exception exp){
 			exp.printStackTrace();
 		}
@@ -264,15 +352,7 @@ public class CaixaVM {
 			exp.printStackTrace();
 		}
 	}
-
-	public Collection<FormaPagamento> getFormasPagamentos() {
-		return formasPagamentos;
-	}
-
-	public void setFormasPagamentos(Collection<FormaPagamento> formasPagamentos) {
-		this.formasPagamentos = formasPagamentos;
-	}
-
+ 
 	public Produto getProduto() {
 		return produto;
 	}
@@ -345,13 +425,6 @@ public class CaixaVM {
 		this.valorTotalCarrinho = valorTotalCarrinho;
 	}
 
-	public FormaPagamento getFormaPagamento() {
-		return formaPagamento;
-	}
-
-	public void setFormaPagamento(FormaPagamento formaPagamento) {
-		this.formaPagamento = formaPagamento;
-	}
 
 	public Integer getQuantidadeParcelasDesejadas() {
 		return quantidadeParcelasDesejadas;
@@ -360,6 +433,22 @@ public class CaixaVM {
 	public void setQuantidadeParcelasDesejadas(Integer quantidadeParcelasDesejadas) {
 		this.quantidadeParcelasDesejadas = quantidadeParcelasDesejadas;
 	}
-	
-	
+
+	public ListModelList getModel() {
+		return model;
+	}
+
+	public void setModel(ListModelList model) {
+		this.model = model;
+	}
+
+	public Integer getCodProduto() {
+		return codProduto;
+	}
+
+	public void setCodProduto(Integer codProduto) {
+		this.codProduto = codProduto;
+	}
+
+	 
 }
