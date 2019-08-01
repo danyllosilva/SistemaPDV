@@ -1,47 +1,35 @@
 package sistema.vendas.server.relatorio;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Template1 {
-	private Integer idRegistroVenda;
+	private Integer registroVendasId;//
 	private Date dataCompra;
-	private String produtoNome;
-	private Integer quantidade;
-	private Double valorProduto;
+	private String nomeProduto; //
+	private Integer quantidade; //
+	private BigDecimal valorTotal; //
 	private Double valorFinalCompra;
 	private Double valorFinalCompraLoja;
+	private Integer formaPagamentoId;
+	private String formaPagamentoNome;
 	
-	
-	public Integer getIdRegistroVenda() {
-		return idRegistroVenda;
-	}
-	public void setIdRegistroVenda(Integer idRegistroVenda) {
-		this.idRegistroVenda = idRegistroVenda;
-	}
+
+
 	public Date getDataCompra() {
 		return dataCompra;
 	}
 	public void setDataCompra(Date dataCompra) {
 		this.dataCompra = dataCompra;
 	}
-	public String getProdutoNome() {
-		return produtoNome;
-	}
-	public void setProdutoNome(String produtoNome) {
-		this.produtoNome = produtoNome;
-	}
+ 
 	public Integer getQuantidade() {
 		return quantidade;
 	}
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
-	public Double getValorProduto() {
-		return valorProduto;
-	}
-	public void setValorProduto(Double valorProduto) {
-		this.valorProduto = valorProduto;
-	}
+	 
 	public Double getValorFinalCompra() {
 		return valorFinalCompra;
 	}
@@ -54,6 +42,76 @@ public class Template1 {
 	public void setValorFinalCompraLoja(Double valorFinalCompraLoja) {
 		this.valorFinalCompraLoja = valorFinalCompraLoja;
 	}
+	public Integer getRegistroVendasId() {
+		return registroVendasId;
+	}
+	public void setRegistroVendasId(Integer registroVendasId) {
+		this.registroVendasId = registroVendasId;
+	}
+	public String getNomeProduto() {
+		return nomeProduto;
+	}
+	public void setNomeProduto(String nomeProduto) {
+		this.nomeProduto = nomeProduto;
+	}
+	public BigDecimal getValorTotal() {
+		return valorTotal;
+	}
+	public void setValorTotal(BigDecimal valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+	public Integer getFormaPagamentoId() {
+		return formaPagamentoId;
+	}
+	public void setFormaPagamentoId(Integer formaPagamentoId) {
+		this.formaPagamentoId = formaPagamentoId;
+		
+		this.formaPagamentoNome = " ";
+		
+		if(this.formaPagamentoId == 0) {
+			this.formaPagamentoNome = "Dinheiro";
+		}
+		
+		if(this.formaPagamentoId == 1) {
+			this.formaPagamentoNome = "Débito";
+		}
+		
+		if(this.formaPagamentoId == 2) {
+			this.formaPagamentoNome = "Ticket";
+		}
+		
+		if(this.formaPagamentoId == 3) {
+			this.formaPagamentoNome = "Mastercard";
+		}
+		
+		if(this.formaPagamentoId == 4) {
+			this.formaPagamentoNome = "Visa";
+		}
+		
+		if(this.formaPagamentoId == 5) {
+			this.formaPagamentoNome = "Elo";
+		}
+		
+		if(this.formaPagamentoId == 6) {
+			this.formaPagamentoNome = "American Express";
+		}
+		
+		if(this.formaPagamentoId == 7) {
+			this.formaPagamentoNome = "Credicard";
+		}
+
+
+	}
+	
+	public String getFormaPagamentoNome() {
+		return formaPagamentoNome;
+	}
+	public void setFormaPagamentoNome(String formaPagamentoNome) {
+		this.formaPagamentoNome = formaPagamentoNome;
+	}
+	 
+	
+	
 	
 }
 /***

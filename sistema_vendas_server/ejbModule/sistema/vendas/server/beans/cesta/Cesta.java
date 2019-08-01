@@ -41,6 +41,8 @@ public class Cesta implements Serializable {
 	@JoinColumn(name="registro_vendas_id", referencedColumnName="registro_vendas_id")
 	private RegistroVendas registroVendas;
 	
+	private Double valorComDescontoFormaPagamento;
+	
 	@Transient
 	private Double valorTotal;
 
@@ -92,8 +94,14 @@ public class Cesta implements Serializable {
 	public void setProdutoId(Integer produtoId) {
 		this.produtoId = produtoId;
 	}
-	
-	
+
+	public Double getValorComDescontoFormaPagamento() {
+		return valorComDescontoFormaPagamento;
+	}
+
+	public void setValorComDescontoFormaPagamento(Double valorComDescontoFormaPagamento) {
+		this.valorComDescontoFormaPagamento = valorComDescontoFormaPagamento;
+	}
 	
 	
 }

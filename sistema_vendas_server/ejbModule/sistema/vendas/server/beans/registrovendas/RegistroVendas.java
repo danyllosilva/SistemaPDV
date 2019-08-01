@@ -34,9 +34,10 @@ public class RegistroVendas {
 	@JoinColumn(name="comprador_id", referencedColumnName="comprador_id")
 	private Comprador comprador;
 	
-	@ManyToOne
-	@JoinColumn(name="forma_pagamento_id", referencedColumnName="forma_pagamento_id")
-	private FormaPagamento formaPagamento;
+	//@ManyToOne
+	//@JoinColumn(name="forma_pagamento_id", referencedColumnName="forma_pagamento_id")
+	//private FormaPagamento formaPagamento;
+	private Integer formaPagamentoId;
 
 	public Integer getRegistroVendasId() {
 		return registroVendasId;
@@ -62,15 +63,14 @@ public class RegistroVendas {
 		this.comprador = comprador;
 	}
 
-	public FormaPagamento getFormaPagamento() {
-		return formaPagamento;
+	public Integer getFormaPagamentoId() {
+		return formaPagamentoId;
 	}
 
-	public void setFormaPagamento(FormaPagamento formaPagamento) {
-		this.formaPagamento = formaPagamento;
+	public void setFormaPagamentoId(Integer formaPagamentoId) {
+		this.formaPagamentoId = formaPagamentoId;
 	}
-	
-	
+
 	
 	
 }

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioDeVendas" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="10004c67-a602-42c0-87ce-a29f7fde0308">
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="registroVendasId" class="java.lang.Integer"/>
+	<field name="nomeProduto" class="java.lang.String"/>
+	<field name="quantidade" class="java.lang.Integer"/>
+	<field name="valorTotal" class="java.math.BigDecimal"/>
+	<field name="valorFinalCompra" class="java.lang.Double"/>
+	<field name="valorFinalCompraLoja" class="java.lang.Double"/>
+	<field name="formaPagamentoNome" class="java.lang.String"/>
+	<field name="dataCompra" class="java.util.Date"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="34" splitType="Stretch">
+			<staticText>
+				<reportElement x="3" y="2" width="37" height="30" uuid="8727de1e-b25c-470f-96a3-5fe02e0ca296"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[ID Venda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="41" y="2" width="98" height="30" uuid="6471012c-c727-4e4c-9140-37b6f0267159"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Produto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="139" y="2" width="32" height="30" uuid="bcd303ed-ead1-4feb-ae3e-84ff3cf1d520"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Qtd.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="172" y="2" width="48" height="30" uuid="f2219079-8520-4963-a818-47fd470c5453"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="222" y="2" width="67" height="30" uuid="37ab50f0-5306-419a-95c4-205af5e95e30">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8c7d220b-bfe8-4dce-b568-4c99311f863f"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[ValorFinalCompra]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="290" y="3" width="100" height="30" uuid="9a6d44e6-fdd8-45de-aad1-881c671c0bae">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d92e510a-e07a-4927-ae2c-38bc57014f2a"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[valorFinalCompraLoja]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="392" y="2" width="100" height="30" uuid="b27bf749-b0d5-4c9e-aa82-33c973e87213">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bd6b45c9-297e-4bd1-94bf-7f8a641ab10b"/>
+				</reportElement>
+				<text><![CDATA[formaPagamentoNome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="493" y="2" width="55" height="30" uuid="d2a3f1ef-b17d-4455-a633-11cf62155f7e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7f1c4f64-5066-418d-92c4-c2721fe5713c"/>
+				</reportElement>
+				<text><![CDATA[dataCompra]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="44" splitType="Stretch">
+			<textField>
+				<reportElement x="2" y="0" width="38" height="30" uuid="13c5f86c-0720-4fdc-b92b-6c13c1e550b2">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6c9005f8-c1a4-414b-948f-de57525bd366"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{registroVendasId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="41" y="1" width="98" height="30" uuid="05346152-1220-4e17-b9de-e0f37b881ae3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1a8152f9-f0a7-4d30-9f9e-42118f04097a"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nomeProduto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="139" y="1" width="32" height="30" uuid="156b652a-988e-48b0-b651-7a9871531d9b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9d93e913-1754-4862-95e9-7e2b4b2be3e3"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{quantidade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="172" y="1" width="48" height="30" uuid="b85f381f-245c-4f0d-aac4-d4c624e68500">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d6e09371-ed0f-4bf9-abf3-d9888cfd3342"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{valorTotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="222" y="1" width="67" height="30" uuid="c3d466db-4854-4b43-80f8-8716d52a994e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8c7d220b-bfe8-4dce-b568-4c99311f863f"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{valorFinalCompra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="291" y="2" width="100" height="30" uuid="01ddc9bb-e172-4790-9cfe-478098a7a82e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d92e510a-e07a-4927-ae2c-38bc57014f2a"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{valorFinalCompraLoja}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="392" y="2" width="100" height="30" uuid="2a00d5ac-6644-455b-a7be-b1f7af1bacfa">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bd6b45c9-297e-4bd1-94bf-7f8a641ab10b"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{formaPagamentoNome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="494" y="2" width="56" height="30" uuid="b5ad084e-d8a5-4c4a-80b8-513aa9224b08">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7f1c4f64-5066-418d-92c4-c2721fe5713c"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{dataCompra}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

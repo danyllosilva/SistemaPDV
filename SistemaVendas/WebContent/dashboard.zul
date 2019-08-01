@@ -2,8 +2,10 @@
 <zk xmlns:x="xhtml" xmlns:n="native" xmlns:w="client" xmlns:ca="client/attribute" xmlns:z="zk">
 <!-- CSS -->
 	<n:link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+		<n:link href="css/bootstrap.min.css" rel="stylesheet" />
+	<!-- 
     <n:link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" 
-    	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+    	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>  -->
    	<n:link href="https://fonts.googleapis.com/css?family=Lato|Roboto" rel="stylesheet"/>
 	 
 	<style>
@@ -74,6 +76,9 @@
 		}
 	</style>
 	<window  viewModel="@id('vm') @init('sistema.vendas.pages.VM.DashboardVM')" style="border:none; padding: 0px;">
+		<div  align="right">
+			<a class="btn btn-danger" onClick="@command('sair')">Sair</a>
+		</div>
 		<div align="center">
 			<hbox>
 					<a class="btn btn-primary" onClick="@command('secaoCategoriaProduto')">Categoria Produto</a>
@@ -84,18 +89,21 @@
 		</div>
 	
 		
-		
-		<window id="winProduto"  title="Produto"  position="center" border="normal" 
-				closable="true" visible="false" width="800px" height="600px" 
+		<window id="winRelatorio"  title="Relatorio"  position="center" border="normal" 
+				closable="true" visible="false" width="800px" height="200px" 
 				onClose="self.visible=false;event.stopPropagation();" >
+					<div align="center">
+			
+				<label>Data Inicial</label>
+				<datebox value="@bind(vm.dataInicial)" format="dd/MM/yyyy" />
+				<label>Data Final</label>
+				<datebox value="@bind(vm.dataFinal)" format="dd/MM/yyyy" />
 				
-		</window>
-		
-		
-		<window id="winRelatorio"  title="Produto"  position="center" border="normal" 
-				closable="true" visible="false" width="800px" height="600px" 
-				onClose="self.visible=false;event.stopPropagation();" >
+				<a class="btn btn-primary" onClick="@command('gerarRelatorio')">Baixar</a>
 				
+				<iframe id="iframe" width="100%" vflex="true"
+				content="@load(vm.media)" name="iframe" />
+			</div>	
 		</window>
 	
 	
