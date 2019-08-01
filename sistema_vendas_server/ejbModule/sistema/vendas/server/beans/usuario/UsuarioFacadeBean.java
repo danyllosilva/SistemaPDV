@@ -39,6 +39,11 @@ public class UsuarioFacadeBean {
 		return user;
 	}
 	
+	public Usuario findByPrimaryKey(Integer usuarioId) {
+		Usuario user = manager.find(Usuario.class, usuarioId);
+		return user;
+	}
+	
 	public Collection<Usuario> findAll(){
 		Collection<Usuario> usuarios = new ArrayList<Usuario>();
 		
