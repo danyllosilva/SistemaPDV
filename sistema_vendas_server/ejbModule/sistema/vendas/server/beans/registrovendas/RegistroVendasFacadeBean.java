@@ -1,8 +1,10 @@
 package sistema.vendas.server.beans.registrovendas;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -13,6 +15,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import sistema.vendas.server.relatorio.Template1;
+import sun.security.util.PropertyExpander.ExpandException;
 
 @Stateless(name=RegistroVendasFacadeBean.NAME)
 public class RegistroVendasFacadeBean {
@@ -65,24 +68,26 @@ public class RegistroVendasFacadeBean {
 				+"LEFT JOIN public.produto as produto ON "
 				+"cesta.produtoId = produto.codigo_produto_id "
 
-				+"WHERE data_venda BETWEEN "+dateFormatter(dataInicial)+" AND "+dateFormatter(dataFinal)+"";
+				+"WHERE data_venda BETWEEN '"+dateFormatter(dataInicial)+"' AND '"+dateFormatter(dataFinal)+"' ";
 		
 		
 		Query q = manager.createNativeQuery(sql);
+		
 		Collection<Template1> relatorioTemplate1 = new ArrayList<Template1>();
 		
 		List<Object[]> result = q.getResultList();
-		
-		
+			 
+		 
 		for(Object[] o: result) {
 			Template1 relatorio = new Template1();
-			
-			relatorio.setIdRegistroVenda((Integer) o[0]);
-			relatorio.setDataCompra((Date) o[1]);
-			relatorio.setProdutoNome((String) o[2]);
-			relatorio.setValorProduto((Double) o[3]);
+			relatorio.setRegistroVendasId((Integer) o[0]);
+ 			relatorio.setDataCompra((Date) o[1]);
+			relatorio.setNomeProduto((String) o[2]);
+			relatorio.setValorTotal((BigDecimal) o[3]); //preco cada produto
 			relatorio.setQuantidade((Integer) o[4]);
+			relatorio.setValorFinalCompra(((BigDecimal) o[3]).doubleValue() * (Integer) o[4]);
 			relatorio.setValorFinalCompraLoja((Double) o[5]);
+			relatorio.setFormaPagamentoId((Integer) o[7]);
 
 			relatorioTemplate1.add(relatorio);
 		}
@@ -91,13 +96,13 @@ public class RegistroVendasFacadeBean {
 	}
 	
 	
-	public Date dateFormatter(Date date) {
+	public static String dateFormatter(Date date) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date dateWithoutTime = null;
+		String dateWithoutTime = null;
 		
 		try {
-			dateWithoutTime = sdf.parse(sdf.format(date));
-		} catch (ParseException e) {
+			dateWithoutTime = sdf.format(date);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
