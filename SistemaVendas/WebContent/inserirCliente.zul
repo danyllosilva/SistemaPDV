@@ -1,8 +1,10 @@
 <?page title="Inserção de Dados Para Compra" contentType="text/html;charset=UTF-8"?>
 <zk xmlns:x="xhtml" xmlns:n="native" xmlns:w="client" xmlns:ca="client/attribute" xmlns:z="zk">
 <n:link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
- <n:link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" 
- 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+ <n:link href="css/bootstrap.min.css" rel="stylesheet" />
+ 
+<!--  <n:link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" 
+ 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/> --> 
 <n:link href="https://fonts.googleapis.com/css?family=Lato|Roboto" rel="stylesheet"/>
 <style>
 		.zero-pd-left{
@@ -73,9 +75,14 @@
 	</style>
 	
 <borderlayout   viewModel="@id('vm') @init('sistema.vendas.pages.VM.InserirClienteVM')">
-	<north size="0"></north>
+	<north size="8" border="none">
+		<div  align="right">
+		<button class="btn btn-danger" onClick="@command('sair')">Sair</button>
+		</div>
+	</north>
 	<south size="0"></south>
 	<center>
+	
 			<div   style="padding-top: 48px; text-align: center;">
 			<label>CPF Comprador: </label>
 			<textbox value="@bind(vm.cpf)" placeholder="000.000.000-00"  maxlength="11"/>
