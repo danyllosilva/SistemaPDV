@@ -115,9 +115,10 @@ public class InserirClienteVM {
 	}
 
 	@Command
+	@NotifyChange("*")
 	public void sair() {
 		Sessions.getCurrent().invalidate();
-		Executions.sendRedirect("login.zul");
+		Executions.sendRedirect("index.zul");
 	}
 	
 	

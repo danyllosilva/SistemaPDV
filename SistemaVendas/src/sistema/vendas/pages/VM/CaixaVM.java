@@ -229,46 +229,70 @@ public class CaixaVM {
 			if(model.getSelection().toString().equals("[Dinheiro]")) {
 				formaPagamento = new Dinheiro();
 				tipoPagamento = TipoPagamento.tipo.Dinheiro.ordinal();	
+				System.out.println("****************************");
+				System.out.println(tipoPagamento);
+				System.out.println("****************************");
 				
 			}
 			
 			if(model.getSelection().toString().equals("[Débito]")) {
 				formaPagamento = new Debito();
 				tipoPagamento = TipoPagamento.tipo.Debito.ordinal();
+				System.out.println("****************************");
+				System.out.println(tipoPagamento);
+				System.out.println("****************************");
 				
 			}
 			
 			if(model.getSelection().toString().equals("[Ticket]")) {
 				formaPagamento = new Ticket();
 				tipoPagamento = TipoPagamento.tipo.Ticket.ordinal();
+				System.out.println("****************************");
+				System.out.println(tipoPagamento);
+				System.out.println("****************************");
 			}
 			
 			if(model.getSelection().toString().equals("[MasterCard]")) {
 				formaPagamento = new MasterCard();
 				tipoPagamento = TipoPagamento.tipo.MasterCard.ordinal();
+				System.out.println("****************************");
+				System.out.println(tipoPagamento);
+				System.out.println("****************************");
 			}
 			
 			if(model.getSelection().toString().equals("[Visa]")) {
 				formaPagamento = new Visa();
 				tipoPagamento = TipoPagamento.tipo.Visa.ordinal();
+				System.out.println("****************************");
+				System.out.println(tipoPagamento);
+				System.out.println("****************************");
 
 			}
 			
 			if(model.getSelection().toString().equals("[Elo]")) {
 				formaPagamento = new Elo();
 				tipoPagamento = TipoPagamento.tipo.Elo.ordinal();
+				System.out.println("****************************");
+				System.out.println(tipoPagamento);
+				System.out.println("****************************");
 
 			}
 			 
 			if(model.getSelection().toString().equals("[American Express]")) {
 				formaPagamento = new AmericanExpress();
 				tipoPagamento = TipoPagamento.tipo.AmericanExpress.ordinal();
+				System.out.println("****************************");
+				System.out.println(tipoPagamento);
+				System.out.println("****************************");
 
 			}
 			
 			if(model.getSelection().toString().equals("[Credicard]")) {
 				formaPagamento = new AmericanExpress();
 				tipoPagamento = TipoPagamento.tipo.Credicard.ordinal();
+				System.out.println("****************************");
+				System.out.println(tipoPagamento);
+				System.out.println("****************************");
 			}
 			
 			if(!formaPagamento.quantidadeParcelasValidas(quantidadeParcelasDesejadas)) {
