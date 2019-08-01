@@ -9,6 +9,8 @@ import org.zkoss.bind.annotation.ContextParam;
 import org.zkoss.bind.annotation.ContextType;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.bind.annotation.Scope;
+import org.zkoss.bind.annotation.ScopeParam;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
@@ -43,8 +45,23 @@ public class LoginVM {
 	}
 	
 	@Init
-	public void init() {
+	public void init(@ScopeParam(scopes = Scope.SESSION, value = "objetoSessao") ObjetoSessao os) {
+		
+		if(os != null) {
+			usuario = usuarioFacadeBean.findByPrimaryKey(os.getUsuarioId());
+			//CAIXA
+			if(usuario.getTipoUsario() == 1) {
+			   Executions.sendRedirect("inserirCliente.zul");
+			}
+			
+			//ADMIN
+			if(usuario.getTipoUsario() == 2) {
+				Executions.sendRedirect("dashboard.zul");
+			}
+		}else {
 			usuario = new Usuario();
+		}
+			
 		 
 	}
 
