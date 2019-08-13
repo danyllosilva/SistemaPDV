@@ -74,6 +74,18 @@
 			color: white;
 			font-weight: bold;
 		}
+		
+		
+		.meus-btns{
+			background-color: #0093f9;
+	    	padding: 68px;
+	    	color: aliceblue;
+   		 }
+   		 
+   		 .meus-btns:hover {
+			  background-color: #0061a5;
+			  color: aliceblue;
+		}
 	</style>
 		<window viewModel="@id('vm') @init('sistema.vendas.pages.VM.CategoriaProdutoVM')" id="winCategoriaProduto"   position="center" border="none"  
 				 visible="true" width="auto" height="600px"   style="border:none; padding: 0px;" >

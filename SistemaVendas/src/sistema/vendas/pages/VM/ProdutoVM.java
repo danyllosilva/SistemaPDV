@@ -1,10 +1,12 @@
 package sistema.vendas.pages.VM;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
@@ -17,6 +19,8 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zul.Selectbox;
 import org.zkoss.zul.Window;
 
 import sistema.vendas.server.beans.categoriaproduto.CategoriaProduto;
@@ -34,6 +38,9 @@ public class ProdutoVM {
 	@Wire("#winProduto")
 	private Window winProduto;
 	
+	@Wire("#selectBoxCategoria")
+	private Selectbox selectBoxCategoria;
+	
 	private Produto produto;
 	private Collection<Produto> produtos;
 	
@@ -44,6 +51,8 @@ public class ProdutoVM {
 	private CategoriaProdutoFacadeBean categoriaProdutoFacadeBean;
 	private boolean desabilitadorBtns;
 	private boolean salvarVisible;
+	
+	private String preco;
 	
 	public ProdutoVM() {
 		try {
@@ -68,6 +77,10 @@ public class ProdutoVM {
 			produto = new Produto();
 			produtos = produtoFacadeBean.findAll();
 			categoriasProduto = categoriaProdutoFacadeBean.findAll();
+			
+			for(Produto p : produtos) {
+				 p.setCategoriaProduto(categoriaProdutoFacadeBean.findByPrimaryKey(p.getCategoriaProdutoId()));
+			}
 		}
 		
 		 
@@ -98,9 +111,13 @@ public class ProdutoVM {
 					if(produto.getCategoriaProduto() != null) {
 						produto.setCategoriaProdutoId(produto.getCategoriaProduto().getCategoriaProdutoId());
 					}
-					produto = produtoFacadeBean.incluir(produto);
+					
+ 					produto = produtoFacadeBean.incluir(produto);
 					produto = new Produto();
 					desabilitadorBtns = false;
+					
+					Clients.showNotification("Inserido!", Clients.NOTIFICATION_TYPE_INFO, null, null, 2500);
+
 					
 					produtos = produtoFacadeBean.findAll();
 				}
@@ -126,7 +143,10 @@ public class ProdutoVM {
 			if(produto.getCategoriaProduto() != null) {
 				produto.setCategoriaProdutoId(produto.getCategoriaProduto().getCategoriaProdutoId());
 			}
+			 
 			produto = produtoFacadeBean.update(produto);
+			Clients.showNotification("Atualizado!", Clients.NOTIFICATION_TYPE_INFO, null, null, 2500);
+
 		}
 	}
 	
@@ -139,6 +159,9 @@ public class ProdutoVM {
 				produtoFacadeBean.remover(produto);
 				
 				produtos.remove(produto);
+				
+				Clients.showNotification("Removido!", Clients.NOTIFICATION_TYPE_INFO, null, null, 2500);
+
 				produto = new Produto();
 				 
 			}catch (Exception e) {
@@ -149,8 +172,17 @@ public class ProdutoVM {
 	
 	
 	
-	
-	
+	@NotifyChange("*")
+	@Command
+	public void carregarComponentes(){
+		System.out.println("produto.getCategoriaProdutoId():"+produto.getCategoriaProdutoId());
+		 
+		 
+		 
+	//	BindUtils.postNotifyChange(null,null, selectBoxCategoria, "*");
+		//selectBoxCategoria.setName(produto.getCategoriaProduto().getNome());
+	//	System.out.println(produto.getCategoriaProduto().getNome());
+	}
 	
 	
 	
@@ -216,6 +248,17 @@ public class ProdutoVM {
 		this.categoriaProduto = categoriaProduto;
 	}
 
-	 
 
+	public String getPreco() {
+		return preco;
+	}
+
+
+	public void setPreco(String preco) {
+		this.preco = preco;
+	}
+
+	 
+	
+	
 }

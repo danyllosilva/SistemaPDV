@@ -73,6 +73,19 @@
 			color: white;
 			font-weight: bold;
 		}
+		
+		
+		.meus-btns{
+			background-color: #0093f9;
+	    	padding: 68px;
+	    	color: aliceblue;
+   		 }
+   		 
+   		 .meus-btns:hover {
+			  background-color: #0061a5;
+			  color: aliceblue;
+		}
+		
 	</style>
 	<borderlayout viewModel="@id('vm') @init('sistema.vendas.pages.VM.CaixaVM')">
 		<north size="0">
@@ -134,19 +147,17 @@
 					</listitem>
 				</template>
 			</listbox>
-			 <div>
-			 	  <label>Buscar por Código</label>
-			 	  <intbox value="@bind(vm.codProduto)" />
-				  <hbox>
-					<label>Descrição Produto:</label> 
-					<label value="@bind(vm.produtoBanco.nome)"/>
-				  </hbox>
-				  <hbox>
-					<label>Quantidade Desejada: </label>
-					<intbox class="form" value="@bind(vm.quantidade)"></intbox>
-				</hbox>
-			</div>
-			    
+			<div class="container" width="50%">
+				 <div  class="form-group">
+				 	  	<x:h4>Buscar por Código</x:h4>
+				 	  	<intbox class="form-control"   value="@bind(vm.codProduto)" />
+	 					<x:h4>Descrição Produto</x:h4>
+	 					
+	 					<textbox class="form-control"  value="@bind(vm.produtoBanco.nome)" disabled="true"/>
+	 					<x:h4>Quantidade Desejada: </x:h4>
+						<intbox class="form-control"  value="@bind(vm.quantidade)"></intbox>
+	 			</div>
+			</div>    
 			<div align="right">
 				<button class="btn-warning" onClick="@command('buscarPorCodigoProduto')">Buscar</button>
 				<button class="btn-primary" onClick="@command('adicionarNoCarrinho')">Adicionar</button>

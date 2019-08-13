@@ -73,18 +73,38 @@
 		a:visited, a:hover, a:active{
 			color: white;
 			font-weight: bold;
+			text-decoration: none;
 		}
+		
+		.meus-btns{
+			background-color: #0093f9;
+	    	padding: 68px;
+	    	color: aliceblue;
+   		 }
+   		 
+   		 .meus-btns:hover {
+			  background-color: #0061a5;
+			  color: aliceblue;
+		}
+   		 
 	</style>
 	<window  viewModel="@id('vm') @init('sistema.vendas.pages.VM.DashboardVM')" style="border:none; padding: 0px;">
-		<div  align="right">
-			<a class="btn btn-danger" onClick="@command('sair')">Sair</a>
-		</div>
+		
+		<x:nav class="navbar navbar-default" style="text-align: right; margin-bottom: 104px;" >
+				<div class="container-fluid" >
+					<x:ul class="nav navbar-nav navbar-right">
+						<x:li><a class="btn btn-danger" onClick="@command('sair')" >Sair</a></x:li>
+					</x:ul>
+				</div>
+		</x:nav>
+		
 		<div align="center">
 			<hbox>
-					<a class="btn btn-primary" onClick="@command('secaoCategoriaProduto')">Categoria Produto</a>
-					<a class="btn btn-primary" onClick="@command('secaoProduto')">Produto</a>
-					<a class="btn btn-primary" onClick="@command('secaoRelatorio')">Relatórios</a>
-				
+			
+					<a onClick="@command('secaoCategoriaProduto')"><span class="meus-btns">Categoria Produto</span></a>
+					<a onClick="@command('secaoProduto')" ><span class="meus-btns">Produto</span></a>
+					<a onClick="@command('secaoRelatorio')"><span class="meus-btns">Relatórios</span></a>
+			
 			</hbox>
 		</div>
 	

@@ -71,6 +71,19 @@
 		a:visited, a:hover, a:active{
 			color: white;
 			font-weight: bold;
+			text-decoration: none;
+		}
+		
+		
+		.meus-btns{
+			background-color: #0093f9;
+	    	padding: 68px;
+	    	color: aliceblue;
+   		 }
+   		 
+   		 .meus-btns:hover {
+			  background-color: #0061a5;
+			  color: aliceblue;
 		}
 	</style>
 	
@@ -82,12 +95,16 @@
 	</north>
 	<south size="0"></south>
 	<center>
-	
 			<div   style="padding-top: 48px; text-align: center;">
-			<label>CPF Comprador: </label>
-			<textbox value="@bind(vm.cpf)" placeholder="000.000.000-00"  maxlength="11"/>
-			<button class="btn-primary" onClick="@command('prosseguir')">Prosseguir</button>
+				<div style="margin-bottom: 84px">
+					<x:h2>CPF Comprador:</x:h2>
+					<textbox class="form-control" value="@bind(vm.cpf)" placeholder="00000000000"  maxlength="11"/>
+				</div>
+				<div>
+				<a class="btn-primary" onClick="@command('prosseguir')"><span class="meus-btns">Prosseguir</span></a>
+			 	</div>
 			</div>
+			 
 	</center>
 	<east size="0"></east>
 	<west size="0"></west>

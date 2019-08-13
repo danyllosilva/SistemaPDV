@@ -80,16 +80,23 @@ public class RegistroVendasFacadeBean {
 		 
 		for(Object[] o: result) {
 			Template1 relatorio = new Template1();
-			relatorio.setRegistroVendasId((Integer) o[0]);
- 			relatorio.setDataCompra((Date) o[1]);
-			relatorio.setNomeProduto((String) o[2]);
-			relatorio.setValorTotal((BigDecimal) o[3]); //preco cada produto
-			relatorio.setQuantidade((Integer) o[4]);
-			relatorio.setValorFinalCompra(((BigDecimal) o[3]).doubleValue() * (Integer) o[4]);
-			relatorio.setValorFinalCompraLoja((Double) o[5]);
-			relatorio.setFormaPagamentoId((Integer) o[7]);
-
-			relatorioTemplate1.add(relatorio);
+			
+			try {
+				relatorio.setRegistroVendasId((Integer) o[0]);
+	 			relatorio.setDataCompra((Date) o[1]);
+				relatorio.setNomeProduto((String) o[2]);
+				relatorio.setValorTotal((BigDecimal) o[3]); //preco cada produto
+				relatorio.setQuantidade((Integer) o[4]);
+				 
+				relatorio.setValorFinalCompra(((BigDecimal) o[3]).doubleValue() * (Integer) o[4]);
+			 
+				 
+				relatorio.setValorFinalCompraLoja((Double) o[5]);
+				relatorio.setFormaPagamentoId((Integer) o[7]);
+			}catch(Exception exp) {
+				exp.printStackTrace();
+			}
+				relatorioTemplate1.add(relatorio);
 		}
 		
 		return relatorioTemplate1;

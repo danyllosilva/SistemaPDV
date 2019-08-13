@@ -74,17 +74,30 @@
 			color: white;
 			font-weight: bold;
 		}
+		
+		
+		.meus-btns{
+			background-color: #0093f9;
+	    	padding: 68px;
+	    	color: aliceblue;
+   		 }
+   		 
+   		 .meus-btns:hover {
+			  background-color: #0061a5;
+			  color: aliceblue;
+		}
 	</style>
 		<window viewModel="@id('vm') @init('sistema.vendas.pages.VM.ProdutoVM')" id="winProduto"   position="center" border="none"  
 				 visible="true" width="auto" height="600px"   style="border:none; padding: 0px;"  contentStyle="overflow:auto;" >
 				
-				<listbox id="listaDeProdutosBanco" model="@bind(vm.produtos)" mold="paging"   pageSize="6"  selectedItem="@bind(vm.produto)">
+				<listbox id="listaDeProdutosBanco" model="@bind(vm.produtos)" mold="paging"   pageSize="6"  selectedItem="@bind(vm.produto)" onSelect="@command('carregarComponentes')">
 					<listhead>
 						<listheader>ID</listheader>
 						<listheader>Nome</listheader>
 						<listheader>Unidade Medida</listheader>
 						<listheader>Preco</listheader>
 						<listheader>Quantidade</listheader>
+						<listheader>Categoria</listheader>
 					</listhead>
 					<template name="model" var="item">
 						<listitem>
@@ -93,34 +106,34 @@
 							<listcell label="@load(item.unidadeMedida)"/>
 							<listcell label="@load(item.preco)"/>
 							<listcell label="@load(item.quantidade)"/>
+								<listcell label="@load(item.categoriaProduto.nome)"/>
 						</listitem>
 					</template>
 				</listbox>
 				
-			<div>
-				<vbox>
-					<label>Nome: </label>
-					<textbox value="@bind(vm.produto.nome)"></textbox>
-					<label>Unidade de Medida: </label>
-					<textbox value="@bind(vm.produto.unidadeMedida)"></textbox>
-					<label>Preco: </label>
-					<textbox value="@bind(vm.produto.preco)"></textbox>
-					<label>Quantidade: </label>
-					<textbox value="@bind(vm.produto.quantidade)"></textbox>
-					
-					<listbox model="@bind(vm.categoriasProduto)" selectedItem="@bind(vm.produto.categoriaProduto)" mold="paging"   pageSize="2" >
-						<template name="model" var="item">
-							<listitem>
-								<listcell  label="@load(item.nome)"/>
-							</listitem>
-						</template>
-					</listbox>
-					
-					<hbox>
-						<button visible="@bind(vm.salvarVisible)" class="btn-success" onClick="@command('salvarNovoProduto')">Salvar</button>
-						<button visible="@bind(vm.salvarVisible)" class="btn-warning" onClick="@command('cancelarSalvarNovoProduto')">Cancelar</button>
-					</hbox>
-				</vbox>
+			<div class="container" width="50%" style="margin-top: 16px;  margin-bottom: 3px;">
+					<div class="form-group"  >
+							<label>Nome: </label>
+							<textbox  class="form-control" value="@bind(vm.produto.nome)"></textbox>
+							<label>Unidade de Medida: </label>
+							<textbox  class="form-control" value="@bind(vm.produto.unidadeMedida)"></textbox>
+							<label>Preco: </label>
+							<textbox class="form-control" value="@bind(vm.produto.preco)"></textbox>
+							<label>Quantidade: </label>
+							<textbox class="form-control" value="@bind(vm.produto.quantidade)"></textbox>
+							
+							<label>Categoria:</label>
+							<selectbox id="selectBoxCategoria" class="form-control form-control-sm" model="@bind(vm.categoriasProduto)"  selectedItem="@bind(vm.produto.categoriaProduto)"   >
+								<template name="model" var="item">
+										<label  value="@load(item.nome)"/>
+								</template>
+							</selectbox>
+							
+							<hbox>
+								<button visible="@bind(vm.salvarVisible)" class="btn btn-success" onClick="@command('salvarNovoProduto')">Salvar</button>
+								<button visible="@bind(vm.salvarVisible)" class="btn btn-warning" onClick="@command('cancelarSalvarNovoProduto')">Cancelar</button>
+							</hbox>
+					</div>
 				
 				
 				<div align="right">

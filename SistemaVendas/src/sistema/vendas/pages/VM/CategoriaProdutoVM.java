@@ -17,6 +17,7 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Window;
 
@@ -92,7 +93,8 @@ public class CategoriaProdutoVM {
 				categoriaProduto = categoriaProdutoFacadeBean.incluir(categoriaProduto);
 				categoriaProduto = new CategoriaProduto();
 				desabilitadorBtns = false;
-				
+				Clients.showNotification("Inserido!", Clients.NOTIFICATION_TYPE_INFO, null, null, 2500);
+
 				categoriasProdutos = categoriaProdutoFacadeBean.findAll();
 			}
 		}
@@ -111,6 +113,8 @@ public class CategoriaProdutoVM {
 	public void editarCategoriaProduto() {
 		if(categoriaProduto != null && categoriaProduto.getCategoriaProdutoId() != null) {
 			categoriaProduto = categoriaProdutoFacadeBean.update(categoriaProduto);
+			Clients.showNotification("Atualizado!", Clients.NOTIFICATION_TYPE_INFO, null, null, 2500);
+
 		}
 	}
 	
@@ -123,6 +127,9 @@ public class CategoriaProdutoVM {
 				categoriaProdutoFacadeBean.remover(categoriaProduto);
 				
 				categoriasProdutos.remove(categoriaProduto);
+				Clients.showNotification("Removido!", Clients.NOTIFICATION_TYPE_INFO, null, null, 2500);
+
+				
 				categoriaProduto = new CategoriaProduto();
 				 
 			}catch (Exception e) {
